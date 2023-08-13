@@ -6,9 +6,6 @@
 //
 
 import UIKit
-import Alamofire
-import SwiftyJSON
-
 
 class ViewController: UIViewController {
     @IBOutlet weak var movieCollectionView: UICollectionView!
@@ -39,7 +36,7 @@ extension ViewController {
             for item in jsonMovieList{
                 let id = item["id"].intValue
                 let title = item["title"].stringValue
-                let overView = item["overView"].stringValue
+                let overView = item["overview"].stringValue
                 let date = item["release_date"].stringValue
                 let posterURL = item["poster_path"].stringValue
                 let backImageURL = item["backdrop_path"].stringValue

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class MovieDetailViewController: UIViewController {
 
@@ -27,8 +28,27 @@ class MovieDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setTableView()
+        setUpLabelUI()
+        setUpMovieData()
         // Do any additional setup after loading the view.
     }
+    
+    func setUpLabelUI(){
+        movieTitleLabel.textColor = .white
+        movieTitleLabel.font = .boldSystemFont(ofSize: 24)
+        
+    }
+    
+    func setUpMovieData(){
+        guard let movie = movie else { return }
+        if let backURL = movie.backImageURL{ movieBackImageView.kf.setImage(with: backURL) }
+        if let posterURL = movie.posterImageURL{ moviePosterImageView.kf.setImage(with: posterURL) }
+        movieTitleLabel.text = movie.title
+        overviewTitleLabel.text = "overview"
+        overviewTextLabel.text = movie.overView
+        
+    }
+    
     
     
 }
@@ -64,3 +84,5 @@ extension MovieDetailViewController: UITableViewDataSource, UITableViewDelegate{
     
     
 }
+
+
