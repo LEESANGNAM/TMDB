@@ -13,15 +13,25 @@ import SwiftyJSON
 class ViewController: UIViewController {
     @IBOutlet weak var movieCollectionView: UICollectionView!
     
+    @IBOutlet weak var weekTitleLabel: UILabel!
+    
     var movieList:[Movie] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        weekTitleLabel.text = "금주의 트렌드!!!!"
+        weekTitleLabel.titleLabelStyle()
         setUpCollectionView()
         callRequest()
     }
     
+   
+    
+}
+
+// MARK: - API
+extension ViewController {
     func callRequest(){
         MovieAPIManager.shared.callRequest(type: .trending) { json in
             let jsonMovieList = json["results"].arrayValue
@@ -32,18 +42,19 @@ class ViewController: UIViewController {
                 let overView = item["overView"].stringValue
                 let date = item["release_date"].stringValue
                 let posterURL = item["poster_path"].stringValue
+                let backImageURL = item["backdrop_path"].stringValue
                 let rating = item["vote_average"].doubleValue
-                let movie = Movie(id: id, title: title, overView: overView, date: date, posterURLString: posterURL, rating: rating)
+                let movie = Movie(id: id, title: title, overView: overView, date: date, posterURLString: posterURL, backIamgeURLString: backImageURL, rating: rating)
                 
                 self.movieList.append(movie)
             }
             self.movieCollectionView.reloadData()
         }
     }
-    
 }
 
 
+// MARK: - collectionView
 extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate{
     
     
@@ -60,6 +71,13 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate{
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let movie = movieList[indexPath.row]
+        let vc = storyboard?.instantiateViewController(withIdentifier: MovieDetailViewController.identifier) as! MovieDetailViewController
+        vc.movie = movie
+        navigationController?.pushViewController(vc, animated: true)
+        
+    }
     
     func setUpCollectionView(){
         movieCollectionView.dataSource = self
@@ -93,4 +111,3 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate{
     }
     
 }
-

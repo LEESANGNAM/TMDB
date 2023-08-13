@@ -33,7 +33,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     func setUpCellData(movie: Movie){
         ratingTitleLabel.text = "평점"
         ratingValueLabel.text = "\(movie.rating)"
-        if let url = movie.imageURL{
+        if let url = movie.posterImageURL{
             moviePosterIamgeView.kf.setImage(with: url)
         }
         movieTitleLabel.text = movie.title

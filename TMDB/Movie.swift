@@ -39,10 +39,14 @@ struct Movie{
     var overView: String
     var date: String
     var posterURLString: String
+    var backIamgeURLString: String
     var rating: Double
     
-    var imageURL: URL?{
+    var posterImageURL: URL?{
         URL(string: MovieAPIManager.imageCDN + posterURLString )
+    }
+    var backImageURL: URL?{
+        URL(string: MovieAPIManager.imageCDN + backIamgeURLString )
     }
     
     
