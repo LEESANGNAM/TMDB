@@ -18,23 +18,33 @@ class MovieDetailTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        setUpUI()
         // Initialization code
+    }
+    
+    func setUpUI(){
+        profileIamgeView.layer.cornerRadius = 20
+        characterJobLabel.textColor = .systemGray3
     }
     
     
     func setUpCellData(credit: MoviePeople){
+        nameLabel.text = credit.name
+        if credit.profileString != "" {
+            profileIamgeView.kf.setImage(with: credit.profileURL)
+        }else{
+            profileIamgeView.image = UIImage(systemName: "person.fill")
+            profileIamgeView.backgroundColor = .systemIndigo
+            profileIamgeView.tintColor = .white
+        }
         switch credit.group{
         case .cast:
             if let castPerson = credit as? Cast{
-                nameLabel.text = castPerson.name
                 characterJobLabel.text = "\(castPerson.character) / \(castPerson.department)"
-                profileIamgeView.kf.setImage(with: castPerson.profileURL)
             }
         case .crew:
             if let crewPerson = credit as? Crew{
-                nameLabel.text = crewPerson.name
                 characterJobLabel.text = "\(crewPerson.job) /  \(crewPerson.department)"
-                profileIamgeView.kf.setImage(with: crewPerson.profileURL)
             }
         }
     }
