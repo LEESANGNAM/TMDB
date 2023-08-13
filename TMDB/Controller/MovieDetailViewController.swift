@@ -24,12 +24,15 @@ class MovieDetailViewController: UIViewController {
     
     var movie: Movie?
     
+    var personList: [[MoviePeople]] = []
+    var sections = CreditType.allCases
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setTableView()
         setUpLabelUI()
         setUpMovieData()
+        callRequest()
         // Do any additional setup after loading the view.
     }
     
@@ -69,20 +72,68 @@ extension MovieDetailViewController: UITableViewDataSource, UITableViewDelegate{
         creditTableView.register(nib, forCellReuseIdentifier: MovieDetailTableViewCell.identifier)
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return personList.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sections[section].rawValue
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return personList[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = creditTableView.dequeueReusableCell(withIdentifier: MovieDetailTableViewCell.identifier) as! MovieDetailTableViewCell
+        let person = personList[indexPath.section][indexPath.row]
         
-        cell.backgroundColor = .blue
+        cell.setUpCellData(credit: person)
         return cell
         
-        
     }
-    
-    
 }
 
+extension MovieDetailViewController{
+    func callRequest(){
+        guard let movie = movie else { return }
+        MovieAPIManager.shared.callRequest(type: .credits(movie.id)) { json in
+            let castList = json["cast"].arrayValue
+            print(castList)
+            var castArray:[Cast] = []
+            for item in castList{
+                let name = item["name"].stringValue
+                let profileString = item["profile_path"].stringValue
+                let department = item["known_for_department"].stringValue
+                let character = item["character"].stringValue
+                let cast = Cast(group: .cast, name: name, profileString: profileString, department: department, character: character)
+                castArray.append(cast)
+                if castArray.count == 10{
+                    self.personList.append(castArray)
+                    break
+                }
+            }
+            let crewList = json["crew"].arrayValue
+            print(crewList)
+            var crewArray:[Crew] = []
+            for item in crewList{
+                if item["known_for_department"].stringValue == "Acting"{
+                    continue
+                }else{
+                    let name = item["name"].stringValue
+                    let profileString = item["profile_path"].stringValue
+                    let department = item["known_for_department"].stringValue
+                    let job = item["job"].stringValue
+                    let crew = Crew(group: .crew, name: name, profileString: profileString, department: department, job: job)
+                    crewArray.append(crew)
+                    if crewArray.count == 10{
+                        self.personList.append(crewArray)
+                        break
+                    }
+                }
+            }
+            self.creditTableView.reloadData()
+        }
+    }
+}
 

@@ -49,6 +49,11 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="characterJobLabel" destination="d3f-e8-xUv" id="jHr-lv-Xri"/>
+                <outlet property="nameLabel" destination="JAs-Ry-xsv" id="KN8-43-MiR"/>
+                <outlet property="profileIamgeView" destination="itV-rr-MZM" id="4jK-nE-ahU"/>
+            </connections>
             <point key="canvasLocation" x="173.2824427480916" y="7.042253521126761"/>
         </tableViewCell>
     </objects>

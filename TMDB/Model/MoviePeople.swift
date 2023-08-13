@@ -43,17 +43,20 @@ import Foundation
 // 공통 필요한거 name known_for_department: Acting이 두개 포함 제외 시키고, profile_path, 타입? cast, crew
 //cast : character   crew job
 
+enum CreditType: String,CaseIterable{
+    case cast,crew
+    
+}
+
 class MoviePeople {
-    enum CreditType{
-        case cast,crew
-    }
+ 
     let group: CreditType
     let name: String
     let profileString: String
     let department: String
     
     var profileURL: URL?{
-        return URL(string: profileString)
+        return URL(string: MovieAPIManager.imageCDN + profileString)
     }
     
     init(group: CreditType, name: String, profileString: String, department: String) {
@@ -67,7 +70,7 @@ class MoviePeople {
 
 class Cast: MoviePeople{
     let character: String
-    init(group: MoviePeople.CreditType, name: String, profileString: String, department: String, character: String){
+    init(group: CreditType, name: String, profileString: String, department: String, character: String){
         self.character = character
         super.init(group: group, name: name, profileString: profileString, department: department)
     }
@@ -75,7 +78,7 @@ class Cast: MoviePeople{
 
 class Crew: MoviePeople{
     let job: String
-    init(group: MoviePeople.CreditType, name: String, profileString: String, department: String, job: String){
+    init(group: CreditType, name: String, profileString: String, department: String, job: String){
         self.job = job
         super.init(group: group, name: name, profileString: profileString, department: department)
     }
