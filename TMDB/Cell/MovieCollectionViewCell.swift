@@ -26,11 +26,11 @@ class MovieCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
         self.layer.cornerRadius = 20
+        self.backgroundColor = .white
+        self.layer.borderWidth = 1
+        setUpLabelDesign()
     }
-    
-    
     func setUpCellData(movie: Movie){
-        
         ratingTitleLabel.text = "평점"
         ratingValueLabel.text = "\(movie.rating)"
         if let url = movie.imageURL{
@@ -42,4 +42,13 @@ class MovieCollectionViewCell: UICollectionViewCell {
         
     }
 
+    func setUpLabelDesign(){
+        ratingTitleLabel.whiteTextWithBlueBackground()
+        ratingTitleLabel.textAlignment = .center
+        ratingValueLabel.blackTextWithWhiteBackground()
+        ratingValueLabel.textAlignment = .center
+        movieTitleLabel.titleLabelStyle()
+    }
+    
+    
 }

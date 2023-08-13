@@ -23,6 +23,7 @@
 		D61A5E992A880D7D00D2EB40 /* MovieCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D61A5E972A880D7D00D2EB40 /* MovieCollectionViewCell.xib */; };
 		D61A5E9B2A880FA900D2EB40 /* identifierProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61A5E9A2A880FA900D2EB40 /* identifierProtocol.swift */; };
 		D697CD232A887B7100DDC556 /* MovieAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D697CD222A887B7100DDC556 /* MovieAPIManager.swift */; };
+		D697CD262A889F1800DDC556 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D697CD252A889F1800DDC556 /* UILabel+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		D61A5E972A880D7D00D2EB40 /* MovieCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieCollectionViewCell.xib; sourceTree = "<group>"; };
 		D61A5E9A2A880FA900D2EB40 /* identifierProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = identifierProtocol.swift; sourceTree = "<group>"; };
 		D697CD222A887B7100DDC556 /* MovieAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieAPIManager.swift; sourceTree = "<group>"; };
+		D697CD252A889F1800DDC556 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 		D61A5E722A87E63300D2EB40 /* TMDB */ = {
 			isa = PBXGroup;
 			children = (
+				D697CD242A889F0400DDC556 /* Extension */,
 				D61A5E9C2A8810B600D2EB40 /* Cell */,
 				D61A5E732A87E63300D2EB40 /* AppDelegate.swift */,
 				D61A5E752A87E63300D2EB40 /* SceneDelegate.swift */,
@@ -100,6 +103,14 @@
 				D61A5E972A880D7D00D2EB40 /* MovieCollectionViewCell.xib */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		D697CD242A889F0400DDC556 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				D697CD252A889F1800DDC556 /* UILabel+Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,6 +204,7 @@
 				D697CD232A887B7100DDC556 /* MovieAPIManager.swift in Sources */,
 				D61A5E762A87E63300D2EB40 /* SceneDelegate.swift in Sources */,
 				D61A5E952A880B5D00D2EB40 /* Movie.swift in Sources */,
+				D697CD262A889F1800DDC556 /* UILabel+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
