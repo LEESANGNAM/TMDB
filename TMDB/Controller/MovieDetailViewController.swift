@@ -24,7 +24,8 @@ class MovieDetailViewController: UIViewController {
     
     var movie: Movie?
     
-    var personList: [[MoviePeople]] = []
+    var castList: [Cast] = []
+    var crewList: [Cast] = []
     var sections = CreditType.allCases
     
     override func viewDidLoad() {
@@ -73,7 +74,7 @@ extension MovieDetailViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return personList.count
+        return sections.count
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -81,14 +82,13 @@ extension MovieDetailViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return personList[section].count
+        return section == 0 ? castList.count : crewList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = creditTableView.dequeueReusableCell(withIdentifier: MovieDetailTableViewCell.identifier) as! MovieDetailTableViewCell
-        let person = personList[indexPath.section][indexPath.row]
-        
-        cell.setUpCellData(credit: person)
+        let person = indexPath.section == 0 ? castList[indexPath.row] : crewList[indexPath.row]
+        cell.setUpCellData(credit: person, type: sections[indexPath.section])
         return cell
         
     }
@@ -97,41 +97,43 @@ extension MovieDetailViewController: UITableViewDataSource, UITableViewDelegate{
 extension MovieDetailViewController{
     func callRequest(){
         guard let movie = movie else { return }
-        MovieAPIManager.shared.callRequest(type: .credits(movie.id)) { json in
-            let castList = json["cast"].arrayValue
-            print(castList)
-            var castArray:[Cast] = []
-            for item in castList{
-                let name = item["name"].stringValue
-                let profileString = item["profile_path"].stringValue
-                let department = item["known_for_department"].stringValue
-                let character = item["character"].stringValue
-                let cast = Cast(group: .cast, name: name, profileString: profileString, department: department, character: character)
-                castArray.append(cast)
-                if castArray.count == 10{
-                    self.personList.append(castArray)
-                    break
-                }
-            }
-            let crewList = json["crew"].arrayValue
-            print(crewList)
-            var crewArray:[Crew] = []
-            for item in crewList{
-                if item["known_for_department"].stringValue == "Acting"{
-                    continue
-                }else{
-                    let name = item["name"].stringValue
-                    let profileString = item["profile_path"].stringValue
-                    let department = item["known_for_department"].stringValue
-                    let job = item["job"].stringValue
-                    let crew = Crew(group: .crew, name: name, profileString: profileString, department: department, job: job)
-                    crewArray.append(crew)
-                    if crewArray.count == 10{
-                        self.personList.append(crewArray)
-                        break
-                    }
-                }
-            }
+        MovieAPIManager.shared.callRequest(type: .credits(movie.id)) { data in    // 여기 로직 뭔가 바꿀수 있을거같다. 일단체크
+            self.castList = data.cast
+            self.crewList = data.crew
+//            let castList = json["cast"].arrayValue
+//            print(castList)
+//            var castArray:[Cast] = []
+//            for item in castList{
+//                let name = item["name"].stringValue
+//                let profileString = item["profile_path"].stringValue
+//                let department = item["known_for_department"].stringValue
+//                let character = item["character"].stringValue
+//                let cast = Cast(group: .cast, name: name, profileString: profileString, department: department, character: character)
+//                castArray.append(cast)
+//                if castArray.count == 10{
+//                    self.personList.append(castArray)
+//                    break
+//                }
+//            }
+//            let crewList = json["crew"].arrayValue
+//            print(crewList)
+//            var crewArray:[Crew] = []
+//            for item in crewList{
+//                if item["known_for_department"].stringValue == "Acting"{
+//                    continue
+//                }else{
+//                    let name = item["name"].stringValue
+//                    let profileString = item["profile_path"].stringValue
+//                    let department = item["known_for_department"].stringValue
+//                    let job = item["job"].stringValue
+//                    let crew = Crew(group: .crew, name: name, profileString: profileString, department: department, job: job)
+//                    crewArray.append(crew)
+//                    if crewArray.count == 10{
+//                        self.personList.append(crewArray)
+//                        break
+//                    }
+//                }
+//            }
             self.creditTableView.reloadData()
         }
     }

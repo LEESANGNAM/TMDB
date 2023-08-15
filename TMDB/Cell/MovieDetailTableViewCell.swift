@@ -28,25 +28,21 @@ class MovieDetailTableViewCell: UITableViewCell {
     }
     
     
-    func setUpCellData(credit: MoviePeople){
+    func setUpCellData(credit: Cast,type: CreditType){
         nameLabel.text = credit.name
-        if credit.profileString != "" {
-            profileIamgeView.kf.setImage(with: credit.profileURL)
-        }else{
+        switch type{
+        case .cast: characterJobLabel.text = "\(credit.character) / \(credit.department)"
+        case .crew: characterJobLabel.text = "\(credit.job) /  \(credit.department)"
+        }
+        guard let urlPath = credit.profilePath, !urlPath.isEmpty,
+              let url = URL(string: urlPath) else {
             profileIamgeView.image = UIImage(systemName: "person.fill")
             profileIamgeView.backgroundColor = .systemIndigo
             profileIamgeView.tintColor = .white
+            return
         }
-        switch credit.group{
-        case .cast:
-            if let castPerson = credit as? Cast{
-                characterJobLabel.text = "\(castPerson.character) / \(castPerson.department)"
-            }
-        case .crew:
-            if let crewPerson = credit as? Crew{
-                characterJobLabel.text = "\(crewPerson.job) /  \(crewPerson.department)"
-            }
-        }
+            profileIamgeView.kf.setImage(with: url)
+     
     }
     
 }

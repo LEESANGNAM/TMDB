@@ -17,23 +17,33 @@ class MovieAPIManager {
     private init(){ }
     
     
-    func callRequest(type: EndPoint, completionHandler: @escaping (JSON) -> () ){
+    func callRequest(type: EndPoint, completionHandler: @escaping (MoviePersons) -> () ){
         let url = type.requestURL
         let header: HTTPHeaders = [
               "Authorization": APIKey.TMDBReadKey
             ]
         print(url)
         
-        AF.request(url,method: .get,headers: header).validate(statusCode: 200...500).responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                let json = JSON(value)
-                print(json)
-                completionHandler(json)
-            case .failure(let error):
-                print(error)
+        AF.request(url,method: .get,headers: header).validate()
+            .responseDecodable(of: MoviePersons.self) { response in
+                switch response.result {
+                case .success(let value):
+                    guard let responseData = response.value else { return }
+                    completionHandler(responseData)
+                case .failure(let error):
+                    print(error)
+                }
             }
-        }
+//            .responseJSON { response in
+//            switch response.result {
+//            case .success(let value):
+//                let json = JSON(value)
+//                print(json)
+//                completionHandler(json)
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
     }
 }
 
