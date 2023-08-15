@@ -57,3 +57,8 @@ enum Department: String, Codable {
     case visualEffects = "Visual Effects"
     case writing = "Writing"
 }
+
+enum CreditType: String,CaseIterable{
+    case cast,crew
+
+}

@@ -22,7 +22,7 @@ class MovieDetailViewController: UIViewController {
     @IBOutlet weak var overviewTextLabel: UILabel!
     @IBOutlet weak var creditTableView: UITableView!
     
-    var movie: Movie?
+    var movie: MovieResult?
     
     var castList: [Cast] = []
     var crewList: [Cast] = []
@@ -45,11 +45,11 @@ class MovieDetailViewController: UIViewController {
     
     func setUpMovieData(){
         guard let movie = movie else { return }
-        if let backURL = movie.backImageURL{ movieBackImageView.kf.setImage(with: backURL) }
-        if let posterURL = movie.posterImageURL{ moviePosterImageView.kf.setImage(with: posterURL) }
+        if let backURL = MovieAPIManager.getImageURL(path: movie.backdropPath) { movieBackImageView.kf.setImage(with: backURL) }
+        if let posterURL = MovieAPIManager.getImageURL(path: movie.posterPath) { moviePosterImageView.kf.setImage(with: posterURL) }
         movieTitleLabel.text = movie.title
         overviewTitleLabel.text = "overview"
-        overviewTextLabel.text = movie.overView
+        overviewTextLabel.text = movie.overview
         
     }
     
@@ -97,43 +97,9 @@ extension MovieDetailViewController: UITableViewDataSource, UITableViewDelegate{
 extension MovieDetailViewController{
     func callRequest(){
         guard let movie = movie else { return }
-        MovieAPIManager.shared.callRequest(type: .credits(movie.id)) { data in    // 여기 로직 뭔가 바꿀수 있을거같다. 일단체크
-            self.castList = data.cast
-            self.crewList = data.crew
-//            let castList = json["cast"].arrayValue
-//            print(castList)
-//            var castArray:[Cast] = []
-//            for item in castList{
-//                let name = item["name"].stringValue
-//                let profileString = item["profile_path"].stringValue
-//                let department = item["known_for_department"].stringValue
-//                let character = item["character"].stringValue
-//                let cast = Cast(group: .cast, name: name, profileString: profileString, department: department, character: character)
-//                castArray.append(cast)
-//                if castArray.count == 10{
-//                    self.personList.append(castArray)
-//                    break
-//                }
-//            }
-//            let crewList = json["crew"].arrayValue
-//            print(crewList)
-//            var crewArray:[Crew] = []
-//            for item in crewList{
-//                if item["known_for_department"].stringValue == "Acting"{
-//                    continue
-//                }else{
-//                    let name = item["name"].stringValue
-//                    let profileString = item["profile_path"].stringValue
-//                    let department = item["known_for_department"].stringValue
-//                    let job = item["job"].stringValue
-//                    let crew = Crew(group: .crew, name: name, profileString: profileString, department: department, job: job)
-//                    crewArray.append(crew)
-//                    if crewArray.count == 10{
-//                        self.personList.append(crewArray)
-//                        break
-//                    }
-//                }
-//            }
+        MovieAPIManager.shared.callRequest(type: .credits(movie.id)) { data in
+            self.castList = Array(data.cast.prefix(10)) //데이터 10개씩 보여주기
+            self.crewList = Array(data.crew.prefix(10))
             self.creditTableView.reloadData()
         }
     }

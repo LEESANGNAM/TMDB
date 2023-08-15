@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var weekTitleLabel: UILabel!
     
-    var movieList:[Movie] = []
+    var movieList:[MovieResult] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,21 +30,8 @@ class ViewController: UIViewController {
 // MARK: - API
 extension ViewController {
     func callRequest(){
-        MovieAPIManager.shared.callRequest(type: .trending) { json in
-            let jsonMovieList = json["results"].arrayValue
-            print(jsonMovieList)
-            for item in jsonMovieList{
-                let id = item["id"].intValue
-                let title = item["title"].stringValue
-                let overView = item["overview"].stringValue
-                let date = item["release_date"].stringValue
-                let posterURL = item["poster_path"].stringValue
-                let backImageURL = item["backdrop_path"].stringValue
-                let rating = item["vote_average"].doubleValue
-                let movie = Movie(id: id, title: title, overView: overView, date: date, posterURLString: posterURL, backIamgeURLString: backImageURL, rating: rating)
-                
-                self.movieList.append(movie)
-            }
+        MovieAPIManager.shared.callRequest(type: .trending) { responseMovieList in
+            self.movieList = responseMovieList
             self.movieCollectionView.reloadData()
         }
     }

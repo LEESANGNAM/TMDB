@@ -30,14 +30,14 @@ class MovieCollectionViewCell: UICollectionViewCell {
         self.layer.borderWidth = 1
         setUpLabelDesign()
     }
-    func setUpCellData(movie: Movie){
+    func setUpCellData(movie: MovieResult){
         ratingTitleLabel.text = "평점"
-        ratingValueLabel.text = "\(movie.rating)"
-        if let url = movie.posterImageURL{
+        ratingValueLabel.text = "\(movie.voteAverage)"
+        if let url = MovieAPIManager.getImageURL(path: movie.posterPath){
             moviePosterIamgeView.kf.setImage(with: url)
         }
         movieTitleLabel.text = movie.title
-        moviewDateLabel.text = movie.date
+        moviewDateLabel.text = movie.releaseDate
         detailLabel.text = "자세히보기!!!!!!!"
         
     }

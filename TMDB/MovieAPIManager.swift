@@ -34,16 +34,24 @@ class MovieAPIManager {
                     print(error)
                 }
             }
-//            .responseJSON { response in
-//            switch response.result {
-//            case .success(let value):
-//                let json = JSON(value)
-//                print(json)
-//                completionHandler(json)
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
+    }
+    func callRequest(type: EndPoint, completionHandler: @escaping ([MovieResult]) -> () ){
+        let url = type.requestURL
+        let header: HTTPHeaders = [
+              "Authorization": APIKey.TMDBReadKey
+            ]
+        print(url)
+        
+        AF.request(url,method: .get,headers: header).validate()
+            .responseDecodable(of: Movie.self) { response in
+                switch response.result {
+                case .success(let value):
+                    guard let responseMovieData = response.value?.results else { return }
+                    completionHandler(responseMovieData)
+                case .failure(let error):
+                    print(error)
+                }
+            }
     }
 }
 
@@ -51,6 +59,10 @@ class MovieAPIManager {
 extension MovieAPIManager {
     static let baseURL = "https://api.themoviedb.org/3/"
     static let imageCDN = "https://image.tmdb.org/t/p/original/"
+    
+    static func getImageURL(path: String) -> URL? {
+        return URL(string: MovieAPIManager.imageCDN + path)
+    }
     
     enum EndPoint {
         case trending
@@ -66,4 +78,5 @@ extension MovieAPIManager {
         }
         
     }
+    
 }

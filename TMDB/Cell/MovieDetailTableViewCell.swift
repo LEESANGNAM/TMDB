@@ -8,7 +8,7 @@
 import UIKit
 import Kingfisher
 class MovieDetailTableViewCell: UITableViewCell {
-
+    
     
     @IBOutlet weak var profileIamgeView: UIImageView!
     
@@ -30,19 +30,20 @@ class MovieDetailTableViewCell: UITableViewCell {
     
     func setUpCellData(credit: Cast,type: CreditType){
         nameLabel.text = credit.name
-        switch type{
-        case .cast: characterJobLabel.text = "\(credit.character) / \(credit.department)"
-        case .crew: characterJobLabel.text = "\(credit.job) /  \(credit.department)"
-        }
-        guard let urlPath = credit.profilePath, !urlPath.isEmpty,
-              let url = URL(string: urlPath) else {
+        if let urlPath = credit.profilePath{
+            let url = MovieAPIManager.getImageURL(path: urlPath)
+            profileIamgeView.kf.setImage(with: url)
+        } else{
             profileIamgeView.image = UIImage(systemName: "person.fill")
             profileIamgeView.backgroundColor = .systemIndigo
             profileIamgeView.tintColor = .white
-            return
         }
-            profileIamgeView.kf.setImage(with: url)
-     
+        
+        switch type{
+        case .cast: characterJobLabel.text = "\(credit.character ?? " " ) / \(credit.knownForDepartment )"
+        case .crew: characterJobLabel.text = "\(credit.job ?? " " ) /  \(credit.knownForDepartment )"
+        }
+        
     }
     
 }
