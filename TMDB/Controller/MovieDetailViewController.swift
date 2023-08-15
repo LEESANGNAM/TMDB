@@ -11,16 +11,19 @@ import Kingfisher
 class MovieDetailViewController: UIViewController {
 
     @IBOutlet weak var movieBackImageView: UIImageView!
-    
     @IBOutlet weak var moviePosterImageView: UIImageView!
-    
-    
     @IBOutlet weak var movieTitleLabel: UILabel!
     
     @IBOutlet weak var overviewTitleLabel: UILabel!
-    
     @IBOutlet weak var overviewTextLabel: UILabel!
+    
+    @IBOutlet weak var overviewStackView: UIStackView!
+    @IBOutlet weak var moreButton: UIButton!
+    
+    
     @IBOutlet weak var creditTableView: UITableView!
+    
+    var isMoreSelect = false
     
     var movie: MovieResult?
     
@@ -40,7 +43,9 @@ class MovieDetailViewController: UIViewController {
     func setUpLabelUI(){
         movieTitleLabel.textColor = .white
         movieTitleLabel.font = .boldSystemFont(ofSize: 24)
-        
+        overviewTextLabel.numberOfLines = 2
+        moreButton.setImage(UIImage(systemName: "chevron.down"), for: .normal)
+        moreButton.tintColor = .darkGray
     }
     
     func setUpMovieData(){
@@ -51,6 +56,18 @@ class MovieDetailViewController: UIViewController {
         overviewTitleLabel.text = "overview"
         overviewTextLabel.text = movie.overview
         
+    }
+    @IBAction func moreButtonTapped(_ sender: UIButton) {
+        if isMoreSelect {
+            overviewTextLabel.numberOfLines = 2
+            isMoreSelect.toggle()
+            moreButton.setImage(UIImage(systemName: "chevron.down"), for: .normal)
+        }else{
+            overviewTextLabel.numberOfLines = 0
+            isMoreSelect.toggle()
+            moreButton.setImage(UIImage(systemName: "chevron.up"), for: .normal)
+        }
+        overviewStackView.layoutIfNeeded()
     }
     
     
