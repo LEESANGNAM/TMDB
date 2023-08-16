@@ -16,7 +16,7 @@ class MovieAPIManager {
     
     private init(){ }
     
-    
+    //영화크루 호출
     func callRequest(type: EndPoint, completionHandler: @escaping (MoviePersons) -> () ){
         let url = type.requestURL
         let header: HTTPHeaders = [
@@ -35,7 +35,8 @@ class MovieAPIManager {
                 }
             }
     }
-    func callRequest(type: EndPoint, completionHandler: @escaping ([MovieResult]) -> () ){
+    //영화저보 호출
+    func callRequest(type: EndPoint,completionHandler: @escaping ([MovieResult]) -> () ){
         let url = type.requestURL
         let header: HTTPHeaders = [
               "Authorization": APIKey.TMDBReadKey
@@ -65,13 +66,13 @@ extension MovieAPIManager {
     }
     
     enum EndPoint {
-        case trending
+        case trending(Int)
         case credits(Int)
         var requestURL: String {
             let baseURL = MovieAPIManager.baseURL
             switch self{
-            case .trending:
-                return baseURL + "trending/movie/week"
+            case .trending(let page):
+                return baseURL + "trending/movie/week?page=\(page)"
             case .credits(let id): //movie/569094/credits
                 return baseURL + "movie/\(id)/credits"
             }

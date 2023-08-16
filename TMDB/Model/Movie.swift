@@ -30,7 +30,7 @@ struct MovieResult: Codable {
     let backdropPath: String
     let id: Int
     let title: String?
-    let originalLanguage: OriginalLanguage
+    let originalLanguage: String
     let originalTitle: String?
     let overview, posterPath: String
     let mediaType: MediaType
@@ -70,8 +70,15 @@ enum MediaType: String, Codable {
     case tv = "tv"
 }
 
-enum OriginalLanguage: String, Codable {
-    case en = "en"
-    case hi = "hi"
-    case ja = "ja"
-}
+//enum OriginalLanguage: String, Codable {
+//    case en = "en"
+//    case hi = "hi"
+//    case ja = "ja"
+//    case fi = "fi"
+//    case fr = "fr"
+//    case pl = "pl"
+//    case de = "de"
+//    case zh = "zh"
+//    case yo = "yo"
+//    case it = "it"
+//}

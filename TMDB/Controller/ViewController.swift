@@ -11,12 +11,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var movieCollectionView: UICollectionView!
     
     @IBOutlet weak var weekTitleLabel: UILabel!
-    
+    var page = 1
     var movieList:[MovieResult] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        movieCollectionView.prefetchDataSource = self
         weekTitleLabel.text = "금주의 트렌드!!!!"
         weekTitleLabel.titleLabelStyle()
         setUpCollectionView()
@@ -30,8 +31,8 @@ class ViewController: UIViewController {
 // MARK: - API
 extension ViewController {
     func callRequest(){
-        MovieAPIManager.shared.callRequest(type: .trending) { responseMovieList in
-            self.movieList = responseMovieList
+        MovieAPIManager.shared.callRequest(type: .trending(page)) { responseMovieList in
+            self.movieList += responseMovieList
             self.movieCollectionView.reloadData()
         }
     }
@@ -93,5 +94,21 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate{
         movieCollectionView.collectionViewLayout = layout
         
     }
+    
+}
+
+extension ViewController: UICollectionViewDataSourcePrefetching{
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        print(indexPaths)
+        for indexPath in indexPaths{
+            print("page:",page)
+            if movieList.count - 1 == indexPath.row && page < 100{
+                print("page:",page)
+                page += 1
+                callRequest()
+            }
+        }
+    }
+    
     
 }
