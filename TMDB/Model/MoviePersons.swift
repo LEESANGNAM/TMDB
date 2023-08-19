@@ -44,6 +44,7 @@ struct Cast: Codable {
 }
 
 enum Department: String, Codable {
+    case Creator = "Creator"
     case acting = "Acting"
     case art = "Art"
     case camera = "Camera"

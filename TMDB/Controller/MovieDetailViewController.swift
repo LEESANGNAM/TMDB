@@ -22,6 +22,7 @@ class MovieDetailViewController: UIViewController {
     
     
     @IBOutlet weak var creditTableView: UITableView!
+    @IBOutlet weak var movieSegumentContol: UISegmentedControl!
     
     var isMoreSelect = false
     
@@ -29,6 +30,7 @@ class MovieDetailViewController: UIViewController {
     
     var castList: [Cast] = []
     var crewList: [Cast] = []
+    var similerList: [SimilerResult] = []
     var sections = CreditType.allCases
     
     override func viewDidLoad() {
@@ -36,7 +38,7 @@ class MovieDetailViewController: UIViewController {
         setTableView()
         setUpLabelUI()
         setUpMovieData()
-        callRequest()
+        callRequestCredit()
         // Do any additional setup after loading the view.
     }
     
@@ -71,6 +73,14 @@ class MovieDetailViewController: UIViewController {
     }
     
     
+    @IBAction func segmentTapped(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0{
+            callRequestCredit()
+        }else if sender.selectedSegmentIndex == 1 {
+            callRequestSimiler()
+        }
+    }
+    
     
 }
 
@@ -104,19 +114,33 @@ extension MovieDetailViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = creditTableView.dequeueReusableCell(withIdentifier: MovieDetailTableViewCell.identifier) as! MovieDetailTableViewCell
-        let person = indexPath.section == 0 ? castList[indexPath.row] : crewList[indexPath.row]
-        cell.setUpCellData(credit: person, type: sections[indexPath.section])
+        
+        if movieSegumentContol.selectedSegmentIndex == 0 {
+            let person = indexPath.section == 0 ? castList[indexPath.row] : crewList[indexPath.row]
+                cell.setUpCellCreditData(credit: person, type: sections[indexPath.section])
+        } else if movieSegumentContol.selectedSegmentIndex == 1 {
+            let similerMovie = similerList[indexPath.row]
+            cell.setUpCellsimilarData(movie: similerMovie)
+        }
         return cell
         
     }
 }
 
 extension MovieDetailViewController{
-    func callRequest(){
+    func callRequestCredit(){
         guard let movie = movie else { return }
-        MovieAPIManager.shared.callRequest(type: .credits(movie.id)) { data in
+        MovieAPIManager.shared.callRequestCredit(type: .credits(movie.id)) { data in
             self.castList = Array(data.cast.prefix(10)) //데이터 10개씩 보여주기
             self.crewList = Array(data.crew.prefix(10))
+            self.creditTableView.reloadData()
+        }
+    }
+    func callRequestSimiler(){
+        guard let movie = movie else { return }
+        MovieAPIManager.shared.callRequestSimiler(type: .similar(movie.id)) { data in
+            self.similerList = data.results
+            print(self.similerList)
             self.creditTableView.reloadData()
         }
     }

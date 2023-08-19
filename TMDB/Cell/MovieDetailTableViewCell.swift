@@ -28,7 +28,7 @@ class MovieDetailTableViewCell: UITableViewCell {
     }
     
     
-    func setUpCellData(credit: Cast,type: CreditType){
+    func setUpCellCreditData(credit: Cast,type: CreditType){
         nameLabel.text = credit.name
         if let urlPath = credit.profilePath{
             let url = MovieAPIManager.getImageURL(path: urlPath)
@@ -43,7 +43,15 @@ class MovieDetailTableViewCell: UITableViewCell {
         case .cast: characterJobLabel.text = "\(credit.character ?? " " ) / \(credit.knownForDepartment )"
         case .crew: characterJobLabel.text = "\(credit.job ?? " " ) /  \(credit.knownForDepartment )"
         }
+    }
+    func setUpCellsimilarData(movie: SimilerResult){
+        nameLabel.text = movie.title
+        characterJobLabel.text = movie.releaseDate
         
+        if let urlPath = movie.posterPath{
+            let url = MovieAPIManager.getImageURL(path: urlPath)
+            profileIamgeView.kf.setImage(with: url)
+        }
     }
     
 }

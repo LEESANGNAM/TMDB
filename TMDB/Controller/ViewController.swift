@@ -24,14 +24,14 @@ class ViewController: UIViewController {
         callRequest()
     }
     
-   
+//   func navie
     
 }
 
 // MARK: - API
 extension ViewController {
     func callRequest(){
-        MovieAPIManager.shared.callRequest(type: .trending(page)) { responseMovieList in
+        MovieAPIManager.shared.callRequestTrending(type: .trending(page)){ responseMovieList in
             self.movieList += responseMovieList
             self.movieCollectionView.reloadData()
         }
@@ -102,13 +102,11 @@ extension ViewController: UICollectionViewDataSourcePrefetching{
         print(indexPaths)
         for indexPath in indexPaths{
             print("page:",page)
-            if movieList.count - 1 == indexPath.row && page < 100{
+            if movieList.count - 1 == indexPath.row && page < 100{ // 계속 데이터가 쌓여서 메모리가 너무많이 차지하게된다. 주말에 알아보자
                 print("page:",page)
                 page += 1
                 callRequest()
             }
         }
     }
-    
-    
 }

@@ -17,43 +17,63 @@ class MovieAPIManager {
     private init(){ }
     
     //영화크루 호출
-    func callRequest(type: EndPoint, completionHandler: @escaping (MoviePersons) -> () ){
+    func callRequestCredit(type: EndPoint, completionHandler: @escaping (MoviePersons) -> () ){
         let url = type.requestURL
         let header: HTTPHeaders = [
               "Authorization": APIKey.TMDBReadKey
             ]
         print(url)
-        
-        AF.request(url,method: .get,headers: header).validate()
+        let parameters: Parameters = ["language": "ko"]
+        AF.request(url,method: .get,parameters: parameters,headers: header).validate()
             .responseDecodable(of: MoviePersons.self) { response in
                 switch response.result {
                 case .success(let value):
-                    guard let responseData = response.value else { return }
-                    completionHandler(responseData)
+                    completionHandler(value)
                 case .failure(let error):
                     print(error)
                 }
             }
     }
     //영화저보 호출
-    func callRequest(type: EndPoint,completionHandler: @escaping ([MovieResult]) -> () ){
+    func callRequestTrending(type: EndPoint,completionHandler: @escaping ([MovieResult]) -> () ){
         let url = type.requestURL
         let header: HTTPHeaders = [
               "Authorization": APIKey.TMDBReadKey
             ]
         print(url)
-        
-        AF.request(url,method: .get,headers: header).validate()
+        let parameters: Parameters = ["language": "ko"]
+        AF.request(url,method: .get,parameters: parameters,headers: header).validate()
             .responseDecodable(of: Movie.self) { response in
                 switch response.result {
                 case .success(let value):
-                    guard let responseMovieData = response.value?.results else { return }
-                    completionHandler(responseMovieData)
+                    completionHandler(value.results)
                 case .failure(let error):
                     print(error)
                 }
             }
     }
+    // similar 비슷한영화
+    func callRequestSimiler(type: EndPoint,completionHandler: @escaping (Similer) -> () ){
+        let url = type.requestURL
+        let header: HTTPHeaders = [
+              "Authorization": APIKey.TMDBReadKey
+            ]
+        print(url)
+        let parameters: Parameters = ["language": "ko"]
+        AF.request(url,method: .get,parameters: parameters,headers: header).validate()
+            .responseDecodable(of: Similer.self) { response in
+                switch response.result {
+                case .success(let value):
+                    completionHandler(value)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+    }
+    
+    
+    
+    
 }
 
 
@@ -68,6 +88,7 @@ extension MovieAPIManager {
     enum EndPoint {
         case trending(Int)
         case credits(Int)
+        case similar(Int)
         var requestURL: String {
             let baseURL = MovieAPIManager.baseURL
             switch self{
@@ -75,6 +96,8 @@ extension MovieAPIManager {
                 return baseURL + "trending/movie/week?page=\(page)"
             case .credits(let id): //movie/569094/credits
                 return baseURL + "movie/\(id)/credits"
+            case .similar(let id):
+                return baseURL + "movie/\(id)/similar"
             }
         }
         
