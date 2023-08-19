@@ -28,8 +28,7 @@ class MovieDetailViewController: UIViewController {
     
     var movie: MovieResult?
     
-    var castList: [Cast] = []
-    var crewList: [Cast] = []
+    var creditList: [[Cast]] = []
     var similerList: [SimilerResult] = []
     var sections = CreditType.allCases
     
@@ -101,22 +100,38 @@ extension MovieDetailViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sections.count
+        if movieSegumentContol.selectedSegmentIndex == 0 {
+            return creditList.count
+        } else if movieSegumentContol.selectedSegmentIndex == 1 {
+           return 1
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sections[section].rawValue
+        
+        if movieSegumentContol.selectedSegmentIndex == 0 {
+            return sections[section].rawValue
+        } else if movieSegumentContol.selectedSegmentIndex == 1 {
+           return ""
+        }
+        return ""
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? castList.count : crewList.count
+        if movieSegumentContol.selectedSegmentIndex == 0 {
+            return creditList[section].count
+        } else if movieSegumentContol.selectedSegmentIndex == 1 {
+           return similerList.count
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = creditTableView.dequeueReusableCell(withIdentifier: MovieDetailTableViewCell.identifier) as! MovieDetailTableViewCell
         
         if movieSegumentContol.selectedSegmentIndex == 0 {
-            let person = indexPath.section == 0 ? castList[indexPath.row] : crewList[indexPath.row]
+            let person = creditList[indexPath.section][indexPath.row]
                 cell.setUpCellCreditData(credit: person, type: sections[indexPath.section])
         } else if movieSegumentContol.selectedSegmentIndex == 1 {
             let similerMovie = similerList[indexPath.row]
@@ -131,8 +146,9 @@ extension MovieDetailViewController{
     func callRequestCredit(){
         guard let movie = movie else { return }
         MovieAPIManager.shared.callRequestCredit(type: .credits(movie.id)) { data in
-            self.castList = Array(data.cast.prefix(10)) //데이터 10개씩 보여주기
-            self.crewList = Array(data.crew.prefix(10))
+            let castList = Array(data.cast.prefix(10)) //데이터 10개씩 보여주기
+            let crewList = Array(data.crew.prefix(10))
+            self.creditList = [castList,crewList]
             self.creditTableView.reloadData()
         }
     }
