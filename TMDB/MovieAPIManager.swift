@@ -53,7 +53,7 @@ class MovieAPIManager {
             }
     }
     // similar 비슷한영화
-    func callRequestSimiler(type: EndPoint,completionHandler: @escaping (Similer) -> () ){
+    func callRequestSimiler(type: EndPoint,completionHandler: @escaping ([SimilerResult]) -> () ){
         let url = type.requestURL
         let header: HTTPHeaders = [
               "Authorization": APIKey.TMDBReadKey
@@ -64,7 +64,25 @@ class MovieAPIManager {
             .responseDecodable(of: Similer.self) { response in
                 switch response.result {
                 case .success(let value):
-                    completionHandler(value)
+                    completionHandler(value.results)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+    }
+    // Videos 예고편 등등
+    func callRequestVideos(type: EndPoint,completionHandler: @escaping ([VideosResult]) -> () ){
+        let url = type.requestURL
+        let header: HTTPHeaders = [
+              "Authorization": APIKey.TMDBReadKey
+            ]
+        print(url)
+        let parameters: Parameters = ["language": "ko"]
+        AF.request(url,method: .get,parameters: parameters,headers: header).validate()
+            .responseDecodable(of: Videos.self) { response in
+                switch response.result {
+                case .success(let value):
+                    completionHandler(value.results)
                 case .failure(let error):
                     print(error)
                 }
@@ -80,15 +98,21 @@ class MovieAPIManager {
 extension MovieAPIManager {
     static let baseURL = "https://api.themoviedb.org/3/"
     static let imageCDN = "https://image.tmdb.org/t/p/original/"
-    
+    static let youtubeImageBaseURL = "https://img.youtube.com/vi/"
     static func getImageURL(path: String) -> URL? {
         return URL(string: MovieAPIManager.imageCDN + path)
+    }
+    // https://img.youtube.com/vi/grxS6XTylX0/0.jpg
+    static func getYoutubeImageURL(path: String) -> URL?{
+        return URL(string: MovieAPIManager.youtubeImageBaseURL + path + "/0.jpg")
     }
     
     enum EndPoint {
         case trending(Int)
         case credits(Int)
         case similar(Int)
+        case videos(Int)
+        
         var requestURL: String {
             let baseURL = MovieAPIManager.baseURL
             switch self{
@@ -98,6 +122,8 @@ extension MovieAPIManager {
                 return baseURL + "movie/\(id)/credits"
             case .similar(let id):
                 return baseURL + "movie/\(id)/similar"
+            case .videos(let id):
+                return baseURL + "movie/\(id)/videos"
             }
         }
         

@@ -44,13 +44,29 @@ class MovieDetailTableViewCell: UITableViewCell {
         case .crew: characterJobLabel.text = "\(credit.job ?? " " ) /  \(credit.knownForDepartment )"
         }
     }
-    func setUpCellsimilarData(movie: SimilerResult){
+    func setUpCellSimilarData(movie: SimilerResult){
         nameLabel.text = movie.title
         characterJobLabel.text = movie.releaseDate
         
         if let urlPath = movie.posterPath{
             let url = MovieAPIManager.getImageURL(path: urlPath)
             profileIamgeView.kf.setImage(with: url)
+        }else{
+            profileIamgeView.image = UIImage(systemName: "popcorn.fill")
+            profileIamgeView.backgroundColor = .systemIndigo
+            profileIamgeView.tintColor = .white
+        }
+    }
+    func setUpCellVideoData(video: VideosResult){
+        nameLabel.text = video.name
+        characterJobLabel.text = video.publishedAt
+        
+        if let url = MovieAPIManager.getYoutubeImageURL(path: video.key){
+            profileIamgeView.kf.setImage(with: url)
+        }else{
+            profileIamgeView.image = UIImage(systemName: "popcorn.fill")
+            profileIamgeView.backgroundColor = .systemIndigo
+            profileIamgeView.tintColor = .white
         }
     }
     
