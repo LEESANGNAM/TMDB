@@ -102,7 +102,7 @@ extension ViewController: UICollectionViewDataSourcePrefetching{
         print(indexPaths)
         for indexPath in indexPaths{
             print("page:",page)
-            if movieList.count - 1 == indexPath.row && page < 100{ // 계속 데이터가 쌓여서 메모리가 너무많이 차지하게된다. 주말에 알아보자
+            if movieList.count - 5 == indexPath.row && page < 100{ // 계속 데이터가 쌓여서 메모리가 너무많이 차지하게된다. 주말에 알아보자
                 print("page:",page)
                 page += 1
                 callRequest()
