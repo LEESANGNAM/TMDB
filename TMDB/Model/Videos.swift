@@ -21,7 +21,17 @@ struct VideosResult: Codable {
     let type: String
     let official: Bool
     let publishedAt, id: String
-
+    func changeFormatDateString() -> String {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+            if let date = dateFormatter.date(from: publishedAt) {
+                dateFormatter.dateFormat = "yyyy-MM-dd"
+                let changeFormatDate = dateFormatter.string(from: date)
+                return "\(changeFormatDate)"
+            } else {
+                return "\(publishedAt)"
+            }
+        }
     enum CodingKeys: String, CodingKey {
         case iso639_1 = "iso_639_1"
         case iso3166_1 = "iso_3166_1"
