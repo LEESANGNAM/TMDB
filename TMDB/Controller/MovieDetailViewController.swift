@@ -135,13 +135,15 @@ extension MovieDetailViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if getSegumentContolSelectedIndex() == 1 {
-            let similerMove = similerVideosList[indexPath.row] as? SimilerResult
-            movie = similerMove
+            let similerMovie = similerVideosList[indexPath.row] as? SimilerResult
+            movie = similerMovie
             print(movie)
             setUpMovieData()
             callRequestSimiler()
-        }else if getSegumentContolSelectedIndex() == 2 {
-            
+        }else if getSegumentContolSelectedIndex() == 2,
+                 let videosMovie = similerVideosList[indexPath.row] as? VideosResult,
+                 let url = MovieAPIManager.getYoutubeVideosBaseURL(path: videosMovie.key){
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
     

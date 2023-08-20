@@ -99,12 +99,17 @@ extension MovieAPIManager {
     static let baseURL = "https://api.themoviedb.org/3/"
     static let imageCDN = "https://image.tmdb.org/t/p/original/"
     static let youtubeImageBaseURL = "https://img.youtube.com/vi/"
+    static let youtubeVideosBaseURL = "https://www.youtube.com/watch?v="
     static func getImageURL(path: String?) -> URL? {
         return URL(string: MovieAPIManager.imageCDN + (path ?? ""))
     }
     // https://img.youtube.com/vi/grxS6XTylX0/0.jpg
     static func getYoutubeImageURL(path: String) -> URL?{
         return URL(string: MovieAPIManager.youtubeImageBaseURL + path + "/0.jpg")
+    }
+    // https://www.youtube.com/watch?v=HItp6ylL_VY
+    static func getYoutubeVideosBaseURL(path: String) -> URL?{
+        return URL(string: MovieAPIManager.youtubeVideosBaseURL + path)
     }
     
     enum EndPoint {
