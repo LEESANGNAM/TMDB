@@ -26,7 +26,7 @@ class MovieDetailViewController: UIViewController {
     
     var isMoreSelect = false
     
-    var movie: MovieResult?
+    var movie: Any?
     
     var creditList: [[Cast]] = []
     var similerVideosList: [Any] = []
@@ -51,11 +51,22 @@ class MovieDetailViewController: UIViewController {
     
     func setUpMovieData(){
         guard let movie = movie else { return }
-        if let backURL = MovieAPIManager.getImageURL(path: movie.backdropPath) { movieBackImageView.kf.setImage(with: backURL) }
-        if let posterURL = MovieAPIManager.getImageURL(path: movie.posterPath) { moviePosterImageView.kf.setImage(with: posterURL) }
-        movieTitleLabel.text = movie.title
-        overviewTitleLabel.text = "overview"
-        overviewTextLabel.text = movie.overview
+        if let movie = movie as? MovieResult {
+            if let backURL = MovieAPIManager.getImageURL(path: movie.backdropPath) {
+                movieBackImageView.kf.setImage(with: backURL) }
+            if let posterURL = MovieAPIManager.getImageURL(path: movie.posterPath) {
+                moviePosterImageView.kf.setImage(with: posterURL) }
+            movieTitleLabel.text = movie.title
+            overviewTitleLabel.text = "overview"
+            overviewTextLabel.text = movie.overview
+        }
+        if let movie = movie as? SimilerResult {
+            if let backURL = MovieAPIManager.getImageURL(path: movie.backdropPath) { movieBackImageView.kf.setImage(with: backURL) }
+            if let posterURL = MovieAPIManager.getImageURL(path: movie.posterPath) { moviePosterImageView.kf.setImage(with: posterURL) }
+            movieTitleLabel.text = movie.title
+            overviewTitleLabel.text = "overview"
+            overviewTextLabel.text = movie.overview
+        }
         
     }
     @IBAction func moreButtonTapped(_ sender: UIButton) {
@@ -102,16 +113,16 @@ extension MovieDetailViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return movieSegumentContol.selectedSegmentIndex == 0 ? creditList.count : 1
+        return getSegumentContolSelectedIndex() == 0 ? creditList.count : 1
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
-        return movieSegumentContol.selectedSegmentIndex == 0 ? sections[section].rawValue : ""
+        return getSegumentContolSelectedIndex() == 0 ? sections[section].rawValue : ""
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return movieSegumentContol.selectedSegmentIndex == 0 ? creditList[section].count : similerVideosList.count
+            return getSegumentContolSelectedIndex() == 0 ? creditList[section].count : similerVideosList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -122,8 +133,25 @@ extension MovieDetailViewController: UITableViewDataSource, UITableViewDelegate{
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if getSegumentContolSelectedIndex() == 1 {
+            let similerMove = similerVideosList[indexPath.row] as? SimilerResult
+            movie = similerMove
+            print(movie)
+            setUpMovieData()
+            callRequestSimiler()
+        }else if getSegumentContolSelectedIndex() == 2 {
+            
+        }
+    }
+    
+    func getSegumentContolSelectedIndex() -> Int{
+        return movieSegumentContol.selectedSegmentIndex
+    }
+    
+    
     func setUpTableViewCellData(cell: MovieDetailTableViewCell, indexPath: IndexPath){
-        if movieSegumentContol.selectedSegmentIndex == 0 {
+        if getSegumentContolSelectedIndex() == 0 {
             let person = creditList[indexPath.section][indexPath.row]
             let type = sections[indexPath.section]
                 cell.setUpCellCreditData(credit: person, type: type)
@@ -141,28 +169,38 @@ extension MovieDetailViewController: UITableViewDataSource, UITableViewDelegate{
 
 extension MovieDetailViewController{
     func callRequestCredit(){
-        guard let movie = movie else { return }
-//        let group = DispatchGroup()
-//        group.enter()
-        MovieAPIManager.shared.callRequestCredit(type: .credits(movie.id)) { data in
-            let castList = Array(data.cast.prefix(10)) //데이터 10개씩 보여주기
-            let crewList = Array(data.crew.prefix(10))
-            self.creditList = [castList,crewList]
-            self.creditTableView.reloadData()
-        }
+        if let movie = movie as? MovieResult { callRequestCreditData(id: movie.id) }
+        if let similerMovie = movie as? SimilerResult {callRequestCreditData(id: similerMovie.id)}
     }
+    
     func callRequestSimiler(){
-        guard let movie = movie else { return }
-        MovieAPIManager.shared.callRequestSimiler(type: .similar(movie.id)) { data in
+        if let movie = movie as? MovieResult {callRequestSimilerData(id: movie.id)}
+        if let similerMovie = movie as? SimilerResult {callRequestSimilerData(id: similerMovie.id)}
+    }
+    func callRequestVideos(){
+        if let movie = movie as? MovieResult { callRequestVideosData(id: movie.id)}
+        if let similerMovie = movie as? SimilerResult {callRequestVideosData(id: similerMovie.id)}
+    }
+    
+    func callRequestSimilerData(id: Int){
+        MovieAPIManager.shared.callRequestSimiler(type: .similar(id)) { data in
             print("------------------------------similer",data)
             self.similerVideosList = []
             self.similerVideosList = data
             self.creditTableView.reloadData()
         }
     }
-    func callRequestVideos(){
-        guard let movie = movie else { return }
-        MovieAPIManager.shared.callRequestVideos(type: .videos(movie.id)) { data in
+    func callRequestCreditData(id: Int){
+        MovieAPIManager.shared.callRequestCredit(type: .credits(id)) { data in
+            let castList = Array(data.cast.prefix(10)) //데이터 10개씩 보여주기
+            let crewList = Array(data.crew.prefix(10))
+            self.creditList = []
+            self.creditList = [castList,crewList]
+            self.creditTableView.reloadData()
+        }
+    }
+    func callRequestVideosData(id: Int){
+        MovieAPIManager.shared.callRequestVideos(type: .videos(id)) { data in
             print("------------------------------videos",data)
             self.similerVideosList = []
             self.similerVideosList = data
