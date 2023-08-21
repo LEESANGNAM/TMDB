@@ -18,6 +18,8 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var movieTitleLabel: UILabel!
     
+    @IBOutlet weak var movieOriginalTitleLabel: UILabel!
+    
     @IBOutlet weak var moviewDateLabel: UILabel!
     
     @IBOutlet weak var detailLabel: UILabel!
@@ -37,6 +39,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
             moviePosterIamgeView.kf.setImage(with: url)
         }
         movieTitleLabel.text = movie.title
+        movieOriginalTitleLabel.text = movie.originalTitle
         moviewDateLabel.text = movie.releaseDate
         detailLabel.text = "자세히보기!!!!!!!"
         

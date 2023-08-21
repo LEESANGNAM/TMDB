@@ -43,30 +43,51 @@
                                     <constraint firstAttribute="height" constant="30" id="gad-0s-89T"/>
                                 </constraints>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="u76-bU-mP4">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="u76-bU-mP4">
                                 <rect key="frame" x="20" y="311.66666666666669" width="497" height="154.33333333333331"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제목~~~~~~~~~~~~~~~~~~~~~~" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rKF-rU-UQC">
-                                        <rect key="frame" x="0.0" y="0.0" width="497" height="22.333333333333332"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nCU-kj-ljK">
+                                        <rect key="frame" x="0.0" y="0.0" width="497" height="82.666666666666671"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="제목~~~~~~~~~~~~~~~~~~~~~~" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rKF-rU-UQC">
+                                                <rect key="frame" x="0.0" y="0.0" width="255.66666666666666" height="82.666666666666671"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KFu-IV-0D5">
+                                                <rect key="frame" x="260.66666666666669" y="0.0" width="236.33333333333331" height="82.666666666666671"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="KFu-IV-0D5" secondAttribute="bottom" id="3mk-1l-lYB"/>
+                                            <constraint firstAttribute="trailing" secondItem="KFu-IV-0D5" secondAttribute="trailing" id="NRk-w7-xme"/>
+                                            <constraint firstItem="KFu-IV-0D5" firstAttribute="top" secondItem="nCU-kj-ljK" secondAttribute="top" id="R7A-Q6-Wnq"/>
+                                            <constraint firstAttribute="bottom" secondItem="rKF-rU-UQC" secondAttribute="bottom" id="Xg1-yp-gao"/>
+                                            <constraint firstItem="rKF-rU-UQC" firstAttribute="top" secondItem="nCU-kj-ljK" secondAttribute="top" id="e3e-w7-bvE"/>
+                                            <constraint firstItem="rKF-rU-UQC" firstAttribute="leading" secondItem="nCU-kj-ljK" secondAttribute="leading" id="o4f-rz-Ojc"/>
+                                            <constraint firstItem="KFu-IV-0D5" firstAttribute="leading" secondItem="rKF-rU-UQC" secondAttribute="trailing" constant="5" id="yAq-F9-KXv"/>
+                                        </constraints>
+                                    </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="개봉일 ~~~~~~~~~" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t59-3N-7fA">
-                                        <rect key="frame" x="0.0" y="32.333333333333314" width="497" height="22"/>
+                                        <rect key="frame" x="0.0" y="92.666666666666629" width="497" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wx7-1u-cuz">
-                                        <rect key="frame" x="0.0" y="64.333333333333314" width="497" height="55"/>
+                                        <rect key="frame" x="0.0" y="123" width="497" height="1"/>
                                         <color key="backgroundColor" systemColor="labelColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="nHI-uG-wZ9"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="자세히보기~~~~~~~~~" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kxs-Tt-T0O">
-                                        <rect key="frame" x="0.0" y="129.33333333333331" width="497" height="25"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="자세히보기~~~~~~~~~" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kxs-Tt-T0O">
+                                        <rect key="frame" x="0.0" y="134" width="497" height="20.333333333333343"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -99,6 +120,7 @@
             <size key="customSize" width="537" height="486"/>
             <connections>
                 <outlet property="detailLabel" destination="kxs-Tt-T0O" id="Td5-Ig-c7Z"/>
+                <outlet property="movieOriginalTitleLabel" destination="KFu-IV-0D5" id="MaZ-X4-gvN"/>
                 <outlet property="moviePosterIamgeView" destination="36E-lH-1mh" id="10T-r1-3ww"/>
                 <outlet property="movieTitleLabel" destination="rKF-rU-UQC" id="9Aw-DU-d7V"/>
                 <outlet property="moviewDateLabel" destination="t59-3N-7fA" id="fYs-I5-mfQ"/>
@@ -111,6 +133,9 @@
     <resources>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
