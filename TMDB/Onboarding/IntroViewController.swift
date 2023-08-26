@@ -74,7 +74,6 @@ extension IntroViewController: UIPageViewControllerDataSource,UIPageViewControll
         
         let nextIndex = currentIndex + 1
         if nextIndex >= list.count{
-            UserDefaultManager.standard.isSelect = true
             return nil
         }else{
             return  list[nextIndex]
