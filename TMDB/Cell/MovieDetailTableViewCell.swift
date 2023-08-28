@@ -55,7 +55,7 @@ class MovieDetailTableViewCell: UITableViewCell {
     }
     func setUpCellVideoData(video: VideosResult){
         nameLabel.text = video.name
-        characterJobLabel.text = video.changeFormatDateString()
+        characterJobLabel.text = video.publishedAt.changeFormatDateString()
         
         if let url = MovieAPIManager.getYoutubeImageURL(path: video.key){
             profileIamgeView.kf.setImage(with: url)
