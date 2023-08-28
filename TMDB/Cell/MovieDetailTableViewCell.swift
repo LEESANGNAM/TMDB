@@ -38,11 +38,7 @@ class MovieDetailTableViewCell: UITableViewCell {
             profileIamgeView.backgroundColor = .systemIndigo
             profileIamgeView.tintColor = .white
         }
-        
-        switch type{
-        case .cast: characterJobLabel.text = "\(credit.character ?? " " ) / \(credit.knownForDepartment )"
-        case .crew: characterJobLabel.text = "\(credit.job ?? " " ) /  \(credit.knownForDepartment )"
-        }
+        characterJobLabel.text = credit.characterJobString
     }
     func setUpCellSimilarData(movie: SimilerResult){
         nameLabel.text = movie.title

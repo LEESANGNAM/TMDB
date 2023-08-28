@@ -47,13 +47,13 @@ class MovieDetailViewController: BaseViewController {
             if let posterURL = MovieAPIManager.getImageURL(path: movie.posterPath) {
                 mainView.moviePosterImageView.kf.setImage(with: posterURL) }
             mainView.movieTitleLabel.text = movie.title
-            mainView.overviewTextLabel.text = movie.overview
+            mainView.overviewTextLabel.text = movie.overview == "" ? "영화설명 없음" : movie.overview
         }
         if let movie = movie as? SimilerResult {
             if let backURL = MovieAPIManager.getImageURL(path: movie.backdropPath) { mainView.movieBackImageView.kf.setImage(with: backURL) }
             if let posterURL = MovieAPIManager.getImageURL(path: movie.posterPath) { mainView.moviePosterImageView.kf.setImage(with: posterURL) }
             mainView.movieTitleLabel.text = movie.title
-            mainView.overviewTextLabel.text = movie.overview
+            mainView.overviewTextLabel.text = movie.overview == "" ? "영화설명 없음" : movie.overview
         }
         
     }

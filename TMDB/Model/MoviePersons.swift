@@ -28,6 +28,13 @@ struct Cast: Codable {
     let order: Int?
     let department: Department?
     let job: String?
+    var characterJobString : String{
+        if let characterJob = character ?? job{
+            return "\(characterJob) / \(knownForDepartment )"
+        }
+        return ""
+    }
+    
 
     enum CodingKeys: String, CodingKey {
         case adult, gender, id

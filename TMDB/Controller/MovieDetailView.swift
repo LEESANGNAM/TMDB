@@ -11,10 +11,12 @@ import UIKit
 class MovieDetailView: BaseView {
     lazy var movieBackImageView = {
         let image =  UIImageView()
+        image.backgroundColor = .blue
         return image
     }()
     lazy var moviePosterImageView = {
         let image =  UIImageView()
+        image.backgroundColor = .gray
         return image
     }()
     lazy var movieTitleLabel = {
