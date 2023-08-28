@@ -43,6 +43,7 @@
 		D6B4D75A2A9C9F22007D7935 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B4D7592A9C9F22007D7935 /* BaseView.swift */; };
 		D6B4D75C2A9C9F89007D7935 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B4D75B2A9C9F89007D7935 /* BaseCollectionViewCell.swift */; };
 		D6B4D75E2A9CA1AA007D7935 /* MovieTrendWeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B4D75D2A9CA1AA007D7935 /* MovieTrendWeekView.swift */; };
+		D6B4D7602A9CABDC007D7935 /* MovieDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B4D75F2A9CABDC007D7935 /* MovieDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +81,7 @@
 		D6B4D7592A9C9F22007D7935 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		D6B4D75B2A9C9F89007D7935 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		D6B4D75D2A9CA1AA007D7935 /* MovieTrendWeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTrendWeekView.swift; sourceTree = "<group>"; };
+		D6B4D75F2A9CABDC007D7935 /* MovieDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +155,7 @@
 				D61A5E772A87E63300D2EB40 /* MovieTrendWeekViewController.swift */,
 				D6B4D75D2A9CA1AA007D7935 /* MovieTrendWeekView.swift */,
 				D61AAC8E2A89029900F3BE4C /* MovieDetailViewController.swift */,
+				D6B4D75F2A9CABDC007D7935 /* MovieDetailView.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 				D67E68D22A9A3158009CC5D8 /* OnboardingImageView.swift in Sources */,
 				D648226F2A9115FA0094E274 /* Videos.swift in Sources */,
 				D61A5E932A88001B00D2EB40 /* APIKey.swift in Sources */,
+				D6B4D7602A9CABDC007D7935 /* MovieDetailView.swift in Sources */,
 				D61A5E982A880D7D00D2EB40 /* MovieCollectionViewCell.swift in Sources */,
 				D648226D2A90C0810094E274 /* Similer.swift in Sources */,
 				D67E68C72A9A2697009CC5D8 /* FirstViewController.swift in Sources */,
