@@ -7,21 +7,26 @@
 
 import UIKit
 
-class MovieTrendWeekViewController: UIViewController {
-    @IBOutlet weak var movieCollectionView: UICollectionView!
+class MovieTrendWeekViewController: BaseViewController {
     
-    @IBOutlet weak var weekTitleLabel: UILabel!
+    let mainView = MovieTrendWeekView()
+    
     var page = 1
     var movieList:[MovieResult] = []
     
+    override func loadView() {
+        self.view = mainView
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        movieCollectionView.prefetchDataSource = self
-        weekTitleLabel.text = "금주의 트렌드!!!!"
-        weekTitleLabel.titleLabelStyle()
-        setUpCollectionView()
+        self.title = "인기 영화 리스트"
         callRequest()
+    }
+    override func setDelegate() {
+        mainView.movieCollectionView.dataSource = self
+        mainView.movieCollectionView.delegate = self
+        mainView.movieCollectionView.prefetchDataSource = self
     }
     
 //   func navie
@@ -33,7 +38,7 @@ extension MovieTrendWeekViewController {
     func callRequest(){
         MovieAPIManager.shared.callRequestTrending(type: .trending(page)){ responseMovieList in
             self.movieList += responseMovieList
-            self.movieCollectionView.reloadData()
+            self.mainView.movieCollectionView.reloadData()
         }
     }
 }
@@ -50,7 +55,6 @@ extension MovieTrendWeekViewController: UICollectionViewDataSource, UICollection
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCollectionViewCell.identifier, for: indexPath) as! MovieCollectionViewCell
         
-        cell.moviePosterIamgeView.backgroundColor = .blue
         cell.setUpCellData(movie: movieList[indexPath.row])
         
         return cell
@@ -58,40 +62,9 @@ extension MovieTrendWeekViewController: UICollectionViewDataSource, UICollection
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let movie = movieList[indexPath.row]
-        let vc = storyboard?.instantiateViewController(withIdentifier: MovieDetailViewController.identifier) as! MovieDetailViewController
+        let vc = MovieDetailViewController()
         vc.movie = movie
         navigationController?.pushViewController(vc, animated: true)
-        
-    }
-    
-    func setUpCollectionView(){
-        movieCollectionView.dataSource = self
-        movieCollectionView.delegate = self
-        setCollectionViewCell()
-        setCollectionViewLayout()
-    }
-    
-    func setCollectionViewCell(){
-        let nib = UINib(nibName: MovieCollectionViewCell.identifier, bundle: nil)
-        movieCollectionView.register(nib, forCellWithReuseIdentifier: MovieCollectionViewCell.identifier)
-    }
-    
-    func setCollectionViewLayout(){
-        let layout = UICollectionViewFlowLayout()
-        let spacing: CGFloat = 30
-        // 전체 너비 가져와서 빼기
-        let width = UIScreen.main.bounds.width - (spacing * 2)
-        let itemSize = width
-        
-        
-        layout.itemSize = CGSize(width: itemSize, height: itemSize)
-        //컬렉션뷰 inset
-        layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
-        // 최소 간격
-        layout.minimumLineSpacing = spacing
-        layout.minimumInteritemSpacing = spacing
-        
-        movieCollectionView.collectionViewLayout = layout
         
     }
     

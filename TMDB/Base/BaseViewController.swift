@@ -14,6 +14,7 @@ class BaseViewController: UIViewController {
         super.viewDidLoad()
         setUpView()
         setConstraints()
+        setDelegate()
         // Do any additional setup after loading the view.
     }
     
@@ -24,6 +25,10 @@ class BaseViewController: UIViewController {
     }
     func setConstraints(){
         print("base setConstraints")
+    }
+    
+    func setDelegate(){
+        
     }
 
 

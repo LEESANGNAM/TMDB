@@ -28,8 +28,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window?.rootViewController = vc
         }else {
             // 3. 아니면 다마고치 메인을  첫화면으로]
-            let sb = UIStoryboard(name: "Main", bundle: nil)
-            let vc = sb.instantiateViewController(withIdentifier: "ViewController") as! ViewController
+           
+            let vc = MovieTrendWeekViewController()
             let nav = UINavigationController(rootViewController: vc)
             window?.rootViewController = nav
             

@@ -42,6 +42,7 @@
 		D6B4D7582A9C9DC7007D7935 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B4D7572A9C9DC7007D7935 /* BaseViewController.swift */; };
 		D6B4D75A2A9C9F22007D7935 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B4D7592A9C9F22007D7935 /* BaseView.swift */; };
 		D6B4D75C2A9C9F89007D7935 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B4D75B2A9C9F89007D7935 /* BaseCollectionViewCell.swift */; };
+		D6B4D75E2A9CA1AA007D7935 /* MovieTrendWeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B4D75D2A9CA1AA007D7935 /* MovieTrendWeekView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,7 @@
 		D6B4D7572A9C9DC7007D7935 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		D6B4D7592A9C9F22007D7935 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		D6B4D75B2A9C9F89007D7935 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
+		D6B4D75D2A9CA1AA007D7935 /* MovieTrendWeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTrendWeekView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				D61A5E772A87E63300D2EB40 /* MovieTrendWeekViewController.swift */,
+				D6B4D75D2A9CA1AA007D7935 /* MovieTrendWeekView.swift */,
 				D61AAC8E2A89029900F3BE4C /* MovieDetailViewController.swift */,
 			);
 			path = Controller;
@@ -295,6 +298,7 @@
 				D67E68C22A99FB67009CC5D8 /* IntroViewController.swift in Sources */,
 				D61A5E782A87E63300D2EB40 /* MovieTrendWeekViewController.swift in Sources */,
 				D67E68C42A99FBD7009CC5D8 /* UserDefaultManager.swift in Sources */,
+				D6B4D75E2A9CA1AA007D7935 /* MovieTrendWeekView.swift in Sources */,
 				D6B4D7582A9C9DC7007D7935 /* BaseViewController.swift in Sources */,
 				D61A5E742A87E63300D2EB40 /* AppDelegate.swift in Sources */,
 				D67E68CD2A9A26C8009CC5D8 /* FourthViewController.swift in Sources */,
