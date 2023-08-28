@@ -159,9 +159,6 @@
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title=" " image="carat.png"/>
                                 <buttonConfiguration key="configuration" style="plain" image="chevron.backward" catalog="system" title=" "/>
-                                <connections>
-                                    <action selector="moreButtonTapped:" destination="Q7g-an-9uW" eventType="touchUpInside" id="2Su-2d-O4k"/>
-                                </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="nfI-8o-GPN">
                                 <rect key="frame" x="20" y="374.33333333333331" width="359" height="32"/>
@@ -170,9 +167,6 @@
                                     <segment title="함께 시청된 콘텐츠"/>
                                     <segment title="예고편 및 다른 영상"/>
                                 </segments>
-                                <connections>
-                                    <action selector="segmentTapped:" destination="Q7g-an-9uW" eventType="valueChanged" id="rIy-gh-dqd"/>
-                                </connections>
                             </segmentedControl>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="26U-pQ-oCJ"/>
@@ -202,17 +196,6 @@
                             <constraint firstItem="amV-95-myH" firstAttribute="top" secondItem="lDf-hm-LnI" secondAttribute="bottom" constant="10" id="yaN-YY-ABO"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="creditTableView" destination="O2q-oL-qzL" id="4gF-gq-cd9"/>
-                        <outlet property="moreButton" destination="ote-Zj-89u" id="Sj8-b9-UJn"/>
-                        <outlet property="movieBackImageView" destination="dE3-sW-Jdc" id="5QQ-tw-1CO"/>
-                        <outlet property="moviePosterImageView" destination="amV-95-myH" id="5gm-ft-a82"/>
-                        <outlet property="movieSegumentContol" destination="nfI-8o-GPN" id="MF9-gz-Cfm"/>
-                        <outlet property="movieTitleLabel" destination="lDf-hm-LnI" id="XLE-Kz-jL4"/>
-                        <outlet property="overviewStackView" destination="voB-3N-rcz" id="dnm-H3-gcI"/>
-                        <outlet property="overviewTextLabel" destination="aP1-cC-mzI" id="BeG-Vr-xKu"/>
-                        <outlet property="overviewTitleLabel" destination="pdU-go-mKH" id="pzy-4i-GQd"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IQu-ZH-9NL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

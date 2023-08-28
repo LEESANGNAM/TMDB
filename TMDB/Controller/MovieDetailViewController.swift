@@ -34,11 +34,9 @@ class MovieDetailViewController: BaseViewController {
     }
     
     func setUpLabelUI(){
-//        movieTitleLabel.textColor = .white
-//        movieTitleLabel.font = .boldSystemFont(ofSize: 24)
-//        overviewTextLabel.numberOfLines = 2
-//        moreButton.setImage(UIImage(systemName: "chevron.down"), for: .normal)
-//        moreButton.tintColor = .darkGray
+        mainView.moreButton.addTarget(self, action: #selector(moreButtonTapped), for: .touchUpInside)
+        mainView.movieSegumentContol.addTarget(self, action: #selector(segmentTapped(_:)), for: .valueChanged)
+
     }
     
     func setUpMovieData(){
@@ -49,19 +47,17 @@ class MovieDetailViewController: BaseViewController {
             if let posterURL = MovieAPIManager.getImageURL(path: movie.posterPath) {
                 mainView.moviePosterImageView.kf.setImage(with: posterURL) }
             mainView.movieTitleLabel.text = movie.title
-//            overviewTitleLabel.text = "overview"
             mainView.overviewTextLabel.text = movie.overview
         }
         if let movie = movie as? SimilerResult {
             if let backURL = MovieAPIManager.getImageURL(path: movie.backdropPath) { mainView.movieBackImageView.kf.setImage(with: backURL) }
             if let posterURL = MovieAPIManager.getImageURL(path: movie.posterPath) { mainView.moviePosterImageView.kf.setImage(with: posterURL) }
             mainView.movieTitleLabel.text = movie.title
-            mainView.overviewTitleLabel.text = "overview"
             mainView.overviewTextLabel.text = movie.overview
         }
         
     }
-    @IBAction func moreButtonTapped(_ sender: UIButton) {
+    @objc func moreButtonTapped(_ sender: UIButton) {
         if isMoreSelect {
             mainView.overviewTextLabel.numberOfLines = 2
             isMoreSelect.toggle()
@@ -75,7 +71,8 @@ class MovieDetailViewController: BaseViewController {
     }
     
     
-    @IBAction func segmentTapped(_ sender: UISegmentedControl) {
+    @objc func segmentTapped(_ sender: UISegmentedControl) {
+        print(mainView.movieSegumentContol.selectedSegmentIndex)
         if sender.selectedSegmentIndex == 0{
             callRequestCredit()
         }else if sender.selectedSegmentIndex == 1 {
