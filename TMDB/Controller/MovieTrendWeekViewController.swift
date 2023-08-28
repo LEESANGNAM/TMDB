@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class MovieTrendWeekViewController: UIViewController {
     @IBOutlet weak var movieCollectionView: UICollectionView!
     
     @IBOutlet weak var weekTitleLabel: UILabel!
@@ -29,7 +29,7 @@ class ViewController: UIViewController {
 }
 
 // MARK: - API
-extension ViewController {
+extension MovieTrendWeekViewController {
     func callRequest(){
         MovieAPIManager.shared.callRequestTrending(type: .trending(page)){ responseMovieList in
             self.movieList += responseMovieList
@@ -40,7 +40,7 @@ extension ViewController {
 
 
 // MARK: - collectionView
-extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate{
+extension MovieTrendWeekViewController: UICollectionViewDataSource, UICollectionViewDelegate{
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -97,7 +97,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate{
     
 }
 
-extension ViewController: UICollectionViewDataSourcePrefetching{
+extension MovieTrendWeekViewController: UICollectionViewDataSourcePrefetching{
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         print(indexPaths)
         for indexPath in indexPaths{
