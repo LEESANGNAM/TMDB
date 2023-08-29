@@ -42,11 +42,20 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = NameSettingViewController()
-        vc.delegate = self
-        navigationController?.pushViewController(vc, animated: true)
+        if indexPath.row == 0 {
+            let vc = NameSettingViewController()
+            vc.delegate = self
+            navigationController?.pushViewController(vc, animated: true)
+        }else if indexPath.row == 1{
+            let vc = UserIdSettingViewController()
+            navigationController?.pushViewController(vc, animated: true)
+            if let cell = mainView.tableView.cellForRow(at: indexPath) as? ProfileTableViewCell {
+                vc.passIdDataHandler = {
+                    cell.contentTextField.text = $0
+                }
+            }
+        }
     }
-    
 }
 
 extension ProfileViewController: DelegatePatternTestProtocol{

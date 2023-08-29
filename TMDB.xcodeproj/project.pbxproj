@@ -50,6 +50,7 @@
 		D6CD17FD2A9E46E500732C3E /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6CD17FC2A9E46E500732C3E /* ProfileTableViewCell.swift */; };
 		D6CD18002A9E5BA700732C3E /* NameSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6CD17FF2A9E5BA700732C3E /* NameSettingViewController.swift */; };
 		D6CD18022A9E5BE000732C3E /* DelegatePatternTestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6CD18012A9E5BE000732C3E /* DelegatePatternTestProtocol.swift */; };
+		D6CD18042A9E620900732C3E /* UserIdSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6CD18032A9E620900732C3E /* UserIdSettingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,6 +95,7 @@
 		D6CD17FC2A9E46E500732C3E /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		D6CD17FF2A9E5BA700732C3E /* NameSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameSettingViewController.swift; sourceTree = "<group>"; };
 		D6CD18012A9E5BE000732C3E /* DelegatePatternTestProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegatePatternTestProtocol.swift; sourceTree = "<group>"; };
+		D6CD18032A9E620900732C3E /* UserIdSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserIdSettingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -258,6 +260,7 @@
 			isa = PBXGroup;
 			children = (
 				D6CD17FF2A9E5BA700732C3E /* NameSettingViewController.swift */,
+				D6CD18032A9E620900732C3E /* UserIdSettingViewController.swift */,
 			);
 			path = DataSetting;
 			sourceTree = "<group>";
@@ -369,6 +372,7 @@
 				D67E68C72A9A2697009CC5D8 /* FirstViewController.swift in Sources */,
 				D61AAC8B2A89026300F3BE4C /* MovieDetailTableViewCell.swift in Sources */,
 				D6B4D75C2A9C9F89007D7935 /* BaseCollectionViewCell.swift in Sources */,
+				D6CD18042A9E620900732C3E /* UserIdSettingViewController.swift in Sources */,
 				D6CD17FB2A9E2B7F00732C3E /* BaseTableViewCell.swift in Sources */,
 				D6B4D75A2A9C9F22007D7935 /* BaseView.swift in Sources */,
 				D61AAC972A8B628500F3BE4C /* MoviePersons.swift in Sources */,
