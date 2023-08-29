@@ -25,6 +25,7 @@ class ProfileView: BaseView{
     let tableView = {
         let view = UITableView()
         view.register(ProfileTableViewCell.self, forCellReuseIdentifier: ProfileTableViewCell.identifier)
+        view.separatorInset = UIEdgeInsets(top: 0, left: 120, bottom: 0, right: 0)
         return view
     }()
     let professionalButton = {

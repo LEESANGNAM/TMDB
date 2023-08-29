@@ -21,7 +21,7 @@ class ProfileViewController: BaseViewController {
     }
     
     override func setUpView() {
-        view.backgroundColor = .white
+        super.setUpView()
     }
     override func setDelegate() {
         mainView.tableView.delegate = self
@@ -54,6 +54,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
             if let cell = mainView.tableView.cellForRow(at: indexPath) as? ProfileTableViewCell {
                 vc.passIdDataHandler = {
                     cell.contentLabel.text = $0
+                    cell.contentLabel.textColor = .black
                 }
             }
         }
@@ -68,6 +69,7 @@ extension ProfileViewController: DelegatePatternTestProtocol{
             if let cell = mainView.tableView.cellForRow(at: selectCellIndexPath) as? ProfileTableViewCell {
                 // 다른 방법이 더 좋을 것 같다.
                 cell.contentLabel.text = name
+                cell.contentLabel.textColor = .black
             }
         }
     }
