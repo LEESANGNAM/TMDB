@@ -20,8 +20,14 @@ class MovieTrendWeekViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.title = "인기 영화 리스트"
+        
         callRequest()
+    }
+    override func setUpView() {
+        super.setUpView()
+        self.title = "인기 영화 리스트"
+        let profileBarButton = UIBarButtonItem(image: UIImage(systemName: "person.circle"), style: .plain, target: self, action: #selector(profileBarButtonTapped))
+        navigationItem.rightBarButtonItem = profileBarButton
     }
     override func setDelegate() {
         mainView.movieCollectionView.dataSource = self
@@ -29,7 +35,10 @@ class MovieTrendWeekViewController: BaseViewController {
         mainView.movieCollectionView.prefetchDataSource = self
     }
     
-//   func navie
+    @objc func profileBarButtonTapped(){
+        let vc = ProfileViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
     
 }
 
