@@ -25,7 +25,6 @@ class ProfileViewController: BaseViewController {
     override func setDelegate() {
         mainView.tableView.delegate = self
         mainView.tableView.dataSource = self
-//        mainView.tableView.register(ProfileTableViewCell.self, forCellReuseIdentifier: ProfileTableViewCell.identifier)
     }
 }
 
@@ -42,9 +41,23 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
         return cell
     }
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return UITableView.automaticDimension
-//    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = NameSettingViewController()
+        vc.delegate = self
+        navigationController?.pushViewController(vc, animated: true)
+    }
     
-    
+}
+
+extension ProfileViewController: DelegatePatternTestProtocol{
+    func passNameData(name: String) {
+        //선택한 셀 인덱스가져와서
+        if let selectCellIndexPath = mainView.tableView.indexPathForSelectedRow{
+            // 셀 인스턴스 찾아서 값넣기
+            if let cell = mainView.tableView.cellForRow(at: selectCellIndexPath) as? ProfileTableViewCell {
+                // 다른 방법이 더 좋을 것 같다.
+                cell.contentTextField.text = name
+            }
+        }
+    }
 }

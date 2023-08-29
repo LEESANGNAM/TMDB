@@ -48,6 +48,8 @@
 		D6CD17F92A9E2A8000732C3E /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6CD17F82A9E2A8000732C3E /* ProfileView.swift */; };
 		D6CD17FB2A9E2B7F00732C3E /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6CD17FA2A9E2B7F00732C3E /* BaseTableViewCell.swift */; };
 		D6CD17FD2A9E46E500732C3E /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6CD17FC2A9E46E500732C3E /* ProfileTableViewCell.swift */; };
+		D6CD18002A9E5BA700732C3E /* NameSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6CD17FF2A9E5BA700732C3E /* NameSettingViewController.swift */; };
+		D6CD18022A9E5BE000732C3E /* DelegatePatternTestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6CD18012A9E5BE000732C3E /* DelegatePatternTestProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +92,8 @@
 		D6CD17F82A9E2A8000732C3E /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		D6CD17FA2A9E2B7F00732C3E /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		D6CD17FC2A9E46E500732C3E /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
+		D6CD17FF2A9E5BA700732C3E /* NameSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameSettingViewController.swift; sourceTree = "<group>"; };
+		D6CD18012A9E5BE000732C3E /* DelegatePatternTestProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegatePatternTestProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				D61A5E9A2A880FA900D2EB40 /* identifierProtocol.swift */,
+				D6CD18012A9E5BE000732C3E /* DelegatePatternTestProtocol.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -241,11 +246,20 @@
 		D6CD17F52A9E181600732C3E /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				D6CD17FE2A9E5B7B00732C3E /* DataSetting */,
 				D6CD17F62A9E183800732C3E /* ProfileViewController.swift */,
 				D6CD17F82A9E2A8000732C3E /* ProfileView.swift */,
 				D6CD17FC2A9E46E500732C3E /* ProfileTableViewCell.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		D6CD17FE2A9E5B7B00732C3E /* DataSetting */ = {
+			isa = PBXGroup;
+			children = (
+				D6CD17FF2A9E5BA700732C3E /* NameSettingViewController.swift */,
+			);
+			path = DataSetting;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -350,6 +364,7 @@
 				D6CD17F72A9E183800732C3E /* ProfileViewController.swift in Sources */,
 				D6B4D7602A9CABDC007D7935 /* MovieDetailView.swift in Sources */,
 				D61A5E982A880D7D00D2EB40 /* MovieCollectionViewCell.swift in Sources */,
+				D6CD18002A9E5BA700732C3E /* NameSettingViewController.swift in Sources */,
 				D648226D2A90C0810094E274 /* Similer.swift in Sources */,
 				D67E68C72A9A2697009CC5D8 /* FirstViewController.swift in Sources */,
 				D61AAC8B2A89026300F3BE4C /* MovieDetailTableViewCell.swift in Sources */,
@@ -359,6 +374,7 @@
 				D61AAC972A8B628500F3BE4C /* MoviePersons.swift in Sources */,
 				D6CD17F92A9E2A8000732C3E /* ProfileView.swift in Sources */,
 				D67E68C92A9A26AF009CC5D8 /* SecondViewController.swift in Sources */,
+				D6CD18022A9E5BE000732C3E /* DelegatePatternTestProtocol.swift in Sources */,
 				D697CD232A887B7100DDC556 /* MovieAPIManager.swift in Sources */,
 				D61A5E762A87E63300D2EB40 /* SceneDelegate.swift in Sources */,
 				D61A5E952A880B5D00D2EB40 /* Movie.swift in Sources */,
