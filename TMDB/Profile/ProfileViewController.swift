@@ -51,7 +51,7 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
             navigationController?.pushViewController(vc, animated: true)
             if let cell = mainView.tableView.cellForRow(at: indexPath) as? ProfileTableViewCell {
                 vc.passIdDataHandler = {
-                    cell.contentTextField.text = $0
+                    cell.contentLabel.text = $0
                 }
             }
         }
@@ -65,7 +65,7 @@ extension ProfileViewController: DelegatePatternTestProtocol{
             // 셀 인스턴스 찾아서 값넣기
             if let cell = mainView.tableView.cellForRow(at: selectCellIndexPath) as? ProfileTableViewCell {
                 // 다른 방법이 더 좋을 것 같다.
-                cell.contentTextField.text = name
+                cell.contentLabel.text = name
             }
         }
     }

@@ -15,15 +15,16 @@ class ProfileTableViewCell: BaseTableViewCell {
         return label
     }()
     
-    let contentTextField = {
-       let textField = UITextField()
-        textField.placeholder = "testContent"
-        return textField
+    let contentLabel = {
+        let label = UILabel()
+        label.text = "testconten"
+        label.textColor = .systemGray4
+        return label
     }()
     
     override func setUpUI() {
         contentView.addSubview(nameLabel)
-        contentView.addSubview(contentTextField)
+        contentView.addSubview(contentLabel)
     }
     
     override func setConstraints() {
@@ -33,7 +34,7 @@ class ProfileTableViewCell: BaseTableViewCell {
             make.leading.equalTo(self).inset(20)
            
         }
-        contentTextField.snp.makeConstraints { make in
+        contentLabel.snp.makeConstraints { make in
             make.verticalEdges.equalToSuperview().inset(10)
             make.trailing.equalTo(self)
             make.height.equalTo(30)
