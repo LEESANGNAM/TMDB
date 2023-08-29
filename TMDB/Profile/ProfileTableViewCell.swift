@@ -30,6 +30,7 @@ class ProfileTableViewCell: BaseTableViewCell {
     override func setConstraints() {
         nameLabel.snp.makeConstraints { make in
             make.verticalEdges.equalToSuperview().inset(10)
+            make.width.equalTo(80)
             make.height.equalTo(30)
             make.leading.equalTo(self).inset(20)
            

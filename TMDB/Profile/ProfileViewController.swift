@@ -10,6 +10,7 @@ import UIKit
 class ProfileViewController: BaseViewController {
     
     let mainView = ProfileView()
+    let profileList = ProfileType.allCases
     
     override func loadView() {
         self.view = mainView
@@ -32,12 +33,13 @@ class ProfileViewController: BaseViewController {
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return profileList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = mainView.tableView.dequeueReusableCell(withIdentifier: ProfileTableViewCell.identifier) as? ProfileTableViewCell else { return UITableViewCell() }
-        
+        cell.nameLabel.text = profileList[indexPath.row].text
+        cell.contentLabel.text =  profileList[indexPath.row].text
         return cell
     }
     

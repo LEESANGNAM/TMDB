@@ -51,6 +51,7 @@
 		D6CD18002A9E5BA700732C3E /* NameSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6CD17FF2A9E5BA700732C3E /* NameSettingViewController.swift */; };
 		D6CD18022A9E5BE000732C3E /* DelegatePatternTestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6CD18012A9E5BE000732C3E /* DelegatePatternTestProtocol.swift */; };
 		D6CD18042A9E620900732C3E /* UserIdSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6CD18032A9E620900732C3E /* UserIdSettingViewController.swift */; };
+		D6CD18072A9E68CF00732C3E /* ProfileType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6CD18062A9E68CF00732C3E /* ProfileType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,6 +97,7 @@
 		D6CD17FF2A9E5BA700732C3E /* NameSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameSettingViewController.swift; sourceTree = "<group>"; };
 		D6CD18012A9E5BE000732C3E /* DelegatePatternTestProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegatePatternTestProtocol.swift; sourceTree = "<group>"; };
 		D6CD18032A9E620900732C3E /* UserIdSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserIdSettingViewController.swift; sourceTree = "<group>"; };
+		D6CD18062A9E68CF00732C3E /* ProfileType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 		D61A5E722A87E63300D2EB40 /* TMDB */ = {
 			isa = PBXGroup;
 			children = (
+				D6CD18052A9E68BE00732C3E /* Enum */,
 				D6CD17F52A9E181600732C3E /* Profile */,
 				D6CD17F42A9E180400732C3E /* Service */,
 				D6CD17F32A9E17F400732C3E /* Protocol */,
@@ -265,6 +268,14 @@
 			path = DataSetting;
 			sourceTree = "<group>";
 		};
+		D6CD18052A9E68BE00732C3E /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				D6CD18062A9E68CF00732C3E /* ProfileType.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -361,6 +372,7 @@
 				D6B4D7622A9D0386007D7935 /* String+Extension.swift in Sources */,
 				D6CD17FD2A9E46E500732C3E /* ProfileTableViewCell.swift in Sources */,
 				D61A5E9B2A880FA900D2EB40 /* identifierProtocol.swift in Sources */,
+				D6CD18072A9E68CF00732C3E /* ProfileType.swift in Sources */,
 				D67E68D22A9A3158009CC5D8 /* OnboardingImageView.swift in Sources */,
 				D648226F2A9115FA0094E274 /* Videos.swift in Sources */,
 				D61A5E932A88001B00D2EB40 /* APIKey.swift in Sources */,
