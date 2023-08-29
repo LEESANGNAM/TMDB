@@ -45,6 +45,9 @@
 		D6B4D7602A9CABDC007D7935 /* MovieDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B4D75F2A9CABDC007D7935 /* MovieDetailView.swift */; };
 		D6B4D7622A9D0386007D7935 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B4D7612A9D0386007D7935 /* String+Extension.swift */; };
 		D6CD17F72A9E183800732C3E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6CD17F62A9E183800732C3E /* ProfileViewController.swift */; };
+		D6CD17F92A9E2A8000732C3E /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6CD17F82A9E2A8000732C3E /* ProfileView.swift */; };
+		D6CD17FB2A9E2B7F00732C3E /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6CD17FA2A9E2B7F00732C3E /* BaseTableViewCell.swift */; };
+		D6CD17FD2A9E46E500732C3E /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6CD17FC2A9E46E500732C3E /* ProfileTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +87,9 @@
 		D6B4D75F2A9CABDC007D7935 /* MovieDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailView.swift; sourceTree = "<group>"; };
 		D6B4D7612A9D0386007D7935 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		D6CD17F62A9E183800732C3E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		D6CD17F82A9E2A8000732C3E /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		D6CD17FA2A9E2B7F00732C3E /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		D6CD17FC2A9E46E500732C3E /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +217,7 @@
 				D6B4D7572A9C9DC7007D7935 /* BaseViewController.swift */,
 				D6B4D7592A9C9F22007D7935 /* BaseView.swift */,
 				D6B4D75B2A9C9F89007D7935 /* BaseCollectionViewCell.swift */,
+				D6CD17FA2A9E2B7F00732C3E /* BaseTableViewCell.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -235,6 +242,8 @@
 			isa = PBXGroup;
 			children = (
 				D6CD17F62A9E183800732C3E /* ProfileViewController.swift */,
+				D6CD17F82A9E2A8000732C3E /* ProfileView.swift */,
+				D6CD17FC2A9E46E500732C3E /* ProfileTableViewCell.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -333,6 +342,7 @@
 				D67E68CD2A9A26C8009CC5D8 /* FourthViewController.swift in Sources */,
 				D67E68CB2A9A26B6009CC5D8 /* ThirdViewController.swift in Sources */,
 				D6B4D7622A9D0386007D7935 /* String+Extension.swift in Sources */,
+				D6CD17FD2A9E46E500732C3E /* ProfileTableViewCell.swift in Sources */,
 				D61A5E9B2A880FA900D2EB40 /* identifierProtocol.swift in Sources */,
 				D67E68D22A9A3158009CC5D8 /* OnboardingImageView.swift in Sources */,
 				D648226F2A9115FA0094E274 /* Videos.swift in Sources */,
@@ -344,8 +354,10 @@
 				D67E68C72A9A2697009CC5D8 /* FirstViewController.swift in Sources */,
 				D61AAC8B2A89026300F3BE4C /* MovieDetailTableViewCell.swift in Sources */,
 				D6B4D75C2A9C9F89007D7935 /* BaseCollectionViewCell.swift in Sources */,
+				D6CD17FB2A9E2B7F00732C3E /* BaseTableViewCell.swift in Sources */,
 				D6B4D75A2A9C9F22007D7935 /* BaseView.swift in Sources */,
 				D61AAC972A8B628500F3BE4C /* MoviePersons.swift in Sources */,
+				D6CD17F92A9E2A8000732C3E /* ProfileView.swift in Sources */,
 				D67E68C92A9A26AF009CC5D8 /* SecondViewController.swift in Sources */,
 				D697CD232A887B7100DDC556 /* MovieAPIManager.swift in Sources */,
 				D61A5E762A87E63300D2EB40 /* SceneDelegate.swift in Sources */,
