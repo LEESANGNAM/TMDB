@@ -5,7 +5,7 @@
 //  Created by 이상남 on 2023/09/02.
 //
 
-import Foundation
+import UIKit
 
 class MultipleViewcontroller: BaseViewController{
     
@@ -18,12 +18,13 @@ class MultipleViewcontroller: BaseViewController{
     var list: [[MultipleResult]] = []
     override func viewDidLoad() {
         super.viewDidLoad()
-        callRequest()
+//        callRequest()
         
     }
     
     override func setUpView() {
         super.setUpView()
+        registerCell()
     }
     
     override func setConstraints() {
@@ -31,7 +32,13 @@ class MultipleViewcontroller: BaseViewController{
     }
     
     override func setDelegate() {
-        
+        mainView.tableView.dataSource = self
+        mainView.tableView.delegate = self
+    }
+    func registerCell(){
+        mainView.tableView.register(MultipleMovieTableViewCell.self, forCellReuseIdentifier: MultipleMovieTableViewCell.identifier)
+        mainView.tableView.register(MultipleTvTableViewCell.self, forCellReuseIdentifier: MultipleTvTableViewCell.identifier)
+        mainView.tableView.register(MultiplePersonTableViewCell.self, forCellReuseIdentifier: MultiplePersonTableViewCell.identifier)
     }
 }
 
@@ -56,4 +63,32 @@ extension MultipleViewcontroller {
             print("list 2 : ",self.list[2])
         }
     }
+}
+
+
+extension MultipleViewcontroller: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row % 3 == 0 {
+            guard let cell = mainView.tableView.dequeueReusableCell(withIdentifier: MultipleMovieTableViewCell.identifier) as? MultipleMovieTableViewCell else { return UITableViewCell() }
+            cell.backgroundColor = .systemRed
+            return cell
+        } else if indexPath.row % 3 == 1{
+            guard let cell = mainView.tableView.dequeueReusableCell(withIdentifier: MultipleTvTableViewCell.identifier) as? MultipleTvTableViewCell else { return UITableViewCell() }
+            cell.backgroundColor = .systemGray
+            return cell
+        } else {
+            guard let cell = mainView.tableView.dequeueReusableCell(withIdentifier: MultiplePersonTableViewCell.identifier) as? MultiplePersonTableViewCell else { return UITableViewCell() }
+            cell.backgroundColor = .systemYellow
+            return cell
+        }
+        
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 200
+    }
+    
 }
