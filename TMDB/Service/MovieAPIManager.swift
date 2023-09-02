@@ -89,6 +89,23 @@ class MovieAPIManager {
             }
     }
     
+    func callRequestAll(type: EndPoint,completionHandler: @escaping ([MultipleResult]) -> ()){
+        let url = type.requestURL
+        let header: HTTPHeaders = [
+              "Authorization": APIKey.TMDBReadKey
+            ]
+        print(url)
+        let parameters: Parameters = ["language": "ko"]
+        AF.request(url,method: .get,parameters: parameters,headers: header).validate()
+            .responseDecodable(of: Multiple.self) { response in
+                switch response.result {
+                case .success(let value):
+                    completionHandler(value.results)
+                case .failure(let error):
+                    print(error)
+                }
+            }
+    }
     
     
     
@@ -117,6 +134,7 @@ extension MovieAPIManager {
         case credits(Int)
         case similar(Int)
         case videos(Int)
+        case all
         
         var requestURL: String {
             let baseURL = MovieAPIManager.baseURL
@@ -129,6 +147,8 @@ extension MovieAPIManager {
                 return baseURL + "movie/\(id)/similar"
             case .videos(let id):
                 return baseURL + "movie/\(id)/videos"
+            case .all:
+                return baseURL + "trending/all/day"
             }
         }
         
