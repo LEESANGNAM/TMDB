@@ -19,19 +19,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
     
-        //1. 만약 유저가 다마고치를 선택했다면
-        // userdefaults : Bool type default (false)
+        //1. 만약 유저가 처음 실행하면
         let isLaunched = UserDefaultManager.standard.isSelect
-        //2. 선택하기를 첫 화면으로
+        //2. 온보딩(소개)를 첫화면
         if isLaunched == false{
             let vc = IntroViewController()
             window?.rootViewController = vc
         }else {
-            // 3. 아니면 다마고치 메인을  첫화면으로]
-           
-            let vc = MovieTrendWeekViewController()
-            let nav = UINavigationController(rootViewController: vc)
-            window?.rootViewController = nav
+            // 3. 아니면 탭바컨트롤러
+            let vc = TabBarController()
+            window?.rootViewController = vc
             
         }
         
