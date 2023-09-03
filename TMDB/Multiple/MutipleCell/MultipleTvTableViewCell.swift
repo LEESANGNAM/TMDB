@@ -31,10 +31,16 @@ class MultipleTvTableViewCell: BaseTableViewCell {
         label.text = "여긴 평점, 일단나와"
         return label
     }()
-    
+    let releseLabel = {
+        let label = UILabel()
+        label.text = "여긴 개봉일?"
+        return label
+    }()
     override func setUpUI() {
+        self.backgroundColor = .systemYellow
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(aveLabel)
+        stackView.addArrangedSubview(releseLabel)
         self.contentView.addSubview(multiImageView)
         self.contentView.addSubview(stackView)
     }
@@ -49,5 +55,14 @@ class MultipleTvTableViewCell: BaseTableViewCell {
             make.leading.equalTo(multiImageView.snp.trailing).offset(20)
             make.trailing.lessThanOrEqualTo(self.safeAreaLayoutGuide)
         }
+    }
+    
+    func setCellData(movie: MultipleResult) {
+        if let url = MovieAPIManager.getImageURL(path: movie.posterPath){
+            multiImageView.kf.setImage(with: url)
+        }
+        titleLabel.text = movie.name
+        aveLabel.text = "평점: \(movie.voteAverage ?? 0)  "
+        releseLabel.text = "개봉일 : " + (movie.firstAirDate ?? "")
     }
 }

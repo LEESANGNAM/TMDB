@@ -8,46 +8,78 @@
 import UIKit
 
 class MultiplePersonTableViewCell: BaseTableViewCell {
-    let multiImageView = {
+    let multiImageView1 = {
         let view = UIImageView()
         view.backgroundColor = .systemBlue
         return view
     }()
-    let stackView = {
-        let view = UIStackView()
-        view.spacing = 10
-        view.axis = .vertical
-        view.alignment = .fill
-        view.distribution = .fill
+    let multiImageView2 = {
+        let view = UIImageView()
+        view.backgroundColor = .systemBlue
         return view
     }()
-    let titleLabel = {
+    let multiImageView3 = {
+        let view = UIImageView()
+        view.backgroundColor = .systemBlue
+        return view
+    }()
+    let posterStackView = {
+        let view = UIStackView()
+        view.spacing = 10
+        view.axis = .horizontal
+        view.alignment = .fill
+        view.distribution = .fillEqually
+        return view
+    }()
+    let nameLabel = {
         let label = UILabel()
-        label.text = "여긴 사람 셀"
+        label.text = "여긴 사람 이름"
         return label
     }()
-    let aveLabel = {
+    let contentLabel = {
         let label = UILabel()
-        label.text = "뭐를 보여줄까"
+        label.text = "출연작"
         return label
     }()
     
     override func setUpUI() {
-        stackView.addArrangedSubview(titleLabel)
-        stackView.addArrangedSubview(aveLabel)
-        self.contentView.addSubview(multiImageView)
-        self.contentView.addSubview(stackView)
+        self.backgroundColor = .systemBlue
+        posterStackView.addArrangedSubview(multiImageView1)
+        posterStackView.addArrangedSubview(multiImageView2)
+        posterStackView.addArrangedSubview(multiImageView3)
+        self.contentView.addSubview(nameLabel)
+        self.contentView.addSubview(contentLabel)
+        self.contentView.addSubview(posterStackView)
     }
     override func setConstraints() {
-        multiImageView.snp.makeConstraints { make in
-            make.leading.equalToSuperview()
-            make.verticalEdges.equalToSuperview().inset(10)
-            make.width.equalTo(multiImageView.snp.height).multipliedBy(3.0/4.0)
+        nameLabel.snp.makeConstraints { make in
+            make.top.equalTo(self.safeAreaLayoutGuide).offset(5)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(20)
         }
-        stackView.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.leading.equalTo(multiImageView.snp.trailing).offset(20)
-            make.trailing.lessThanOrEqualTo(self.safeAreaLayoutGuide)
+        contentLabel.snp.makeConstraints { make in
+            make.top.equalTo(nameLabel.snp.bottom).offset(5)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(20)
+        }
+        posterStackView.snp.makeConstraints { make in
+            make.top.equalTo(contentLabel.snp.bottom).offset(10)
+            make.horizontalEdges.bottom.equalToSuperview().inset(10)
+        }
+    }
+    func setCellData(person: MultipleResult) {
+        if let name = person.name {  nameLabel.text = name }
+        if let department = person.knownForDepartment { contentLabel.text = department }
+        let movieList = person.knownFor
+        for (index,subview) in posterStackView.subviews.enumerated(){
+            if let imageView = subview as? UIImageView,
+               let movieList {
+                if index < movieList.count{
+                    if let url = MovieAPIManager.getImageURL(path:movieList[index].posterPath){
+                        imageView.kf.setImage(with: url)
+                    }
+                }
+            }
         }
     }
 }

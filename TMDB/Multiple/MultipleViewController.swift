@@ -18,7 +18,7 @@ class MultipleViewcontroller: BaseViewController{
     var list: [[MultipleResult]] = []
     override func viewDidLoad() {
         super.viewDidLoad()
-//        callRequest()
+        callRequest()
         
     }
     
@@ -45,16 +45,16 @@ class MultipleViewcontroller: BaseViewController{
 extension MultipleViewcontroller {
     func callRequest(){
         MovieAPIManager.shared.callRequestAll(type: .all) { data in
-//            let movie = data.filter { data in
-//                return data.mediaType == .movie
-//            }
+            //            let movie = data.filter { data in
+            //                return data.mediaType == .movie
+            //            }
             self.multiTypeList.forEach { type in
                 self.list.append(data.filter { data in
                     return data.mediaType == type
                 })
             }
-            
-            dump(self.list)
+            self.mainView.tableView.reloadData()
+            print(self.list)
             print("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ")
             print("list 0 : ",self.list[0])
             print("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ")
@@ -67,22 +67,38 @@ extension MultipleViewcontroller {
 
 
 extension MultipleViewcontroller: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
-    }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return multiTypeList.count
+    }
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return multiTypeList[section].rawValue
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard section < list.count else {
+                return 0
+            }
+        if section == 0 {
+            return list[section].count
+        } else if section == 1{
+            return list[section].count
+        } else {
+            return list[section].count
+        }
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row % 3 == 0 {
-            guard let cell = mainView.tableView.dequeueReusableCell(withIdentifier: MultipleMovieTableViewCell.identifier) as? MultipleMovieTableViewCell else { return UITableViewCell() }
-            cell.backgroundColor = .systemRed
+        let data = list[indexPath.section][indexPath.row]
+        if indexPath.section == 0 {
+            guard let cell = mainView.tableView.dequeueReusableCell(withIdentifier: MultipleMovieTableViewCell.identifier,for: indexPath) as? MultipleMovieTableViewCell else { return UITableViewCell() }
+            cell.setCellData(movie: data)
             return cell
-        } else if indexPath.row % 3 == 1{
-            guard let cell = mainView.tableView.dequeueReusableCell(withIdentifier: MultipleTvTableViewCell.identifier) as? MultipleTvTableViewCell else { return UITableViewCell() }
-            cell.backgroundColor = .systemGray
+        } else if indexPath.section == 1{
+            guard let cell = mainView.tableView.dequeueReusableCell(withIdentifier: MultiplePersonTableViewCell.identifier,for: indexPath) as? MultiplePersonTableViewCell else { return UITableViewCell() }
+            cell.setCellData(person: data)
             return cell
         } else {
-            guard let cell = mainView.tableView.dequeueReusableCell(withIdentifier: MultiplePersonTableViewCell.identifier) as? MultiplePersonTableViewCell else { return UITableViewCell() }
-            cell.backgroundColor = .systemYellow
+            guard let cell = mainView.tableView.dequeueReusableCell(withIdentifier: MultipleTvTableViewCell.identifier,for: indexPath) as? MultipleTvTableViewCell else { return UITableViewCell() }
+            cell.setCellData(movie: data)
             return cell
         }
         

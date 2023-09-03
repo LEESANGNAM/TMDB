@@ -148,7 +148,7 @@ extension MovieAPIManager {
             case .videos(let id):
                 return baseURL + "movie/\(id)/videos"
             case .all:
-                return baseURL + "trending/all/day"
+                return baseURL + "trending/all/day?page=400"
             }
         }
         
