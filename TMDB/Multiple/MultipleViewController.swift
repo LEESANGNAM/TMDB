@@ -44,23 +44,14 @@ class MultipleViewcontroller: BaseViewController{
 
 extension MultipleViewcontroller {
     func callRequest(){
-        MovieAPIManager.shared.callRequestAll(type: .all) { data in
-            //            let movie = data.filter { data in
-            //                return data.mediaType == .movie
-            //            }
+        MovieAPIManager.shared.callRequest(type: .all) { (data: Multiple) in
+            let results = data.results
             self.multiTypeList.forEach { type in
-                self.list.append(data.filter { data in
+                self.list.append(results.filter { data in
                     return data.mediaType == type
                 })
             }
             self.mainView.tableView.reloadData()
-            print(self.list)
-            print("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ")
-            print("list 0 : ",self.list[0])
-            print("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ")
-            print("list 1 : ",self.list[1])
-            print("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ")
-            print("list 2 : ",self.list[2])
         }
     }
 }

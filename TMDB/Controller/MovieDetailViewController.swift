@@ -174,15 +174,14 @@ extension MovieDetailViewController{
     }
     
     func callRequestSimilerData(id: Int){
-        MovieAPIManager.shared.callRequestSimiler(type: .similar(id)) { data in
-            print("------------------------------similer",data)
+        MovieAPIManager.shared.callRequest(type: .similar(id)) { (data: Similer) in
             self.similerVideosList = []
-            self.similerVideosList = data
+            self.similerVideosList = data.results
             self.mainView.creditTableView.reloadData()
         }
     }
     func callRequestCreditData(id: Int){
-        MovieAPIManager.shared.callRequestCredit(type: .credits(id)) { data in
+        MovieAPIManager.shared.callRequest(type: .credits(id)) { (data :MoviePersons) in
             let castList = Array(data.cast.prefix(10)) //데이터 10개씩 보여주기
             let crewList = Array(data.crew.prefix(10))
             self.creditList = []
@@ -191,10 +190,9 @@ extension MovieDetailViewController{
         }
     }
     func callRequestVideosData(id: Int){
-        MovieAPIManager.shared.callRequestVideos(type: .videos(id)) { data in
-            print("------------------------------videos",data)
+        MovieAPIManager.shared.callRequest(type: .videos(id)) { (data: Videos) in
             self.similerVideosList = []
-            self.similerVideosList = data
+            self.similerVideosList = data.results
             self.mainView.creditTableView.reloadData()
         }
     }

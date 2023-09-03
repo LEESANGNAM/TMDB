@@ -16,99 +16,24 @@ class MovieAPIManager {
     
     private init(){ }
     
-    //영화크루 호출
-    func callRequestCredit(type: EndPoint, completionHandler: @escaping (MoviePersons) -> () ){
-        let url = type.requestURL
-        let header: HTTPHeaders = [
-              "Authorization": APIKey.TMDBReadKey
-            ]
-        print(url)
-        let parameters: Parameters = ["language": "ko"]
-        AF.request(url,method: .get,parameters: parameters,headers: header).validate()
-            .responseDecodable(of: MoviePersons.self) { response in
-                switch response.result {
-                case .success(let value):
-                    completionHandler(value)
-                case .failure(let error):
-                    print(error)
-                }
-            }
-    }
-    //영화저보 호출
-    func callRequestTrending(type: EndPoint,completionHandler: @escaping ([MovieResult]) -> () ){
-        let url = type.requestURL
-        let header: HTTPHeaders = [
-              "Authorization": APIKey.TMDBReadKey
-            ]
-        print(url)
-        let parameters: Parameters = ["language": "ko"]
-        AF.request(url,method: .get,parameters: parameters,headers: header).validate()
-            .responseDecodable(of: Movie.self) { response in
-                switch response.result {
-                case .success(let value):
-                    completionHandler(value.results)
-                case .failure(let error):
-                    print(error)
-                }
-            }
-    }
-    // similar 비슷한영화
-    func callRequestSimiler(type: EndPoint,completionHandler: @escaping ([SimilerResult]) -> () ){
-        let url = type.requestURL
-        let header: HTTPHeaders = [
-              "Authorization": APIKey.TMDBReadKey
-            ]
-        print(url)
-        let parameters: Parameters = ["language": "ko"]
-        AF.request(url,method: .get,parameters: parameters,headers: header).validate()
-            .responseDecodable(of: Similer.self) { response in
-                switch response.result {
-                case .success(let value):
-                    completionHandler(value.results)
-                case .failure(let error):
-                    print(error)
-                }
-            }
-    }
-    // Videos 예고편 등등
-    func callRequestVideos(type: EndPoint,completionHandler: @escaping ([VideosResult]) -> () ){
-        let url = type.requestURL
-        let header: HTTPHeaders = [
-              "Authorization": APIKey.TMDBReadKey
-            ]
-        print(url)
-        let parameters: Parameters = ["language": "ko"]
-        AF.request(url,method: .get,parameters: parameters,headers: header).validate()
-            .responseDecodable(of: Videos.self) { response in
-                switch response.result {
-                case .success(let value):
-                    completionHandler(value.results)
-                case .failure(let error):
-                    print(error)
-                }
-            }
-    }
     
-    func callRequestAll(type: EndPoint,completionHandler: @escaping ([MultipleResult]) -> ()){
-        let url = type.requestURL
-        let header: HTTPHeaders = [
-              "Authorization": APIKey.TMDBReadKey
+    func callRequest<T: Codable>(type: EndPoint, completionHandler: @escaping (T) -> ()) {
+            let url = type.requestURL
+            let header: HTTPHeaders = [
+                "Authorization": APIKey.TMDBReadKey
             ]
-        print(url)
-        let parameters: Parameters = ["language": "ko"]
-        AF.request(url,method: .get,parameters: parameters,headers: header).validate()
-            .responseDecodable(of: Multiple.self) { response in
-                switch response.result {
-                case .success(let value):
-                    completionHandler(value.results)
-                case .failure(let error):
-                    print(error)
+            let parameters: Parameters = ["language": "ko"]
+            
+            AF.request(url, method: .get, parameters: parameters, headers: header).validate()
+                .responseDecodable(of: T.self) { response in
+                    switch response.result {
+                    case .success(let value):
+                        completionHandler(value)
+                    case .failure(let error):
+                        print(error)
+                    }
                 }
-            }
-    }
-    
-    
-    
+        }
 }
 
 
@@ -148,7 +73,7 @@ extension MovieAPIManager {
             case .videos(let id):
                 return baseURL + "movie/\(id)/videos"
             case .all:
-                return baseURL + "trending/all/day?page=400"
+                return baseURL + "trending/all/day"
             }
         }
         

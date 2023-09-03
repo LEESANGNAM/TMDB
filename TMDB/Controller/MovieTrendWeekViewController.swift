@@ -45,10 +45,14 @@ class MovieTrendWeekViewController: BaseViewController {
 // MARK: - API
 extension MovieTrendWeekViewController {
     func callRequest(){
-        MovieAPIManager.shared.callRequestTrending(type: .trending(page)){ responseMovieList in
-            self.movieList += responseMovieList
+        MovieAPIManager.shared.callRequest(type: .trending(page)) { (data: Movie) in
+            self.movieList += data.results
             self.mainView.movieCollectionView.reloadData()
         }
+//        MovieAPIManager.shared.callRequestTrending(type: .trending(page)){ responseMovieList in
+//            self.movieList += responseMovieList
+//            self.mainView.movieCollectionView.reloadData()
+//        }
     }
 }
 
